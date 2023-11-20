@@ -230,3 +230,301 @@
 
 - OS 상관없이 실행 할 수 있다는 것이 더 이득이기 때문에 사용!
 
+
+### JIt AOT
+
+1. JIt (Just In Time)
+  - 실행 시점에 자주 실행하는 코드를 진짜 기계어로 바꿔놓고 그 기계어를 실행하여 실행속도를 높이는 방식
+
+  - 이전 방식
+  ```
+          명령어 하나씩           실행
+  Bytecode --------------> JVM ----------> OS
+             읽어서 
+  
+  Bytecode를 JVM으로 하나씩 읽어서 실행하였다
+
+  ```
+  - JIT 컴파일 방식
+  ```
+
+            명령어 읽기         실행(기존방식)
+  Bytecode ------------> JVM ------------------->  
+                                                           OS
+    
+    자주실행되는 명령어 실행시점에 기계어로 바꾸어 보관
+                        기계어(Cache) ----------------->
+                                실행(직접실행) 
+  - 기존방식과 새로운 방식으로 인해 속도 개선
+  - 캐시에 보관 기계어는 실행 완료 시점에 제거된다 (영구보관 X)
+  
+  ```
+
+2. AOT (Ahead Of Time) 
+  - JIT 방식은 실행 시점에 컴파일 하기 때문에 일시적 실행이 느려지는 문제가 있다
+  - 이를 해결할 목적으로 AOT 만들어졌다
+
+```
+--Playstore--          ----------Andorid-------------
+
+       1 -> 2                3                      4
+App -----------------> App-----------기계어 -------->실행
+
+ 1. 다운로드
+ 2. 설치
+ 3. 설치과정중에 미리 컴파일
+ 4. 실행
+
+```
+  - 장점 
+    - 실행속도가 빠르다
+    - 설치 과정에 기계어로 바꾸기 때문에 설치 시간이 길어짐
+
+### 빌드 (Build) 도구
+
+1. 빌드
+```
+컴파일 --> 테스트 --> 보고서/문서작성 -->배포 파일준비 --> 배포
+
+<---------------- S/W 제작 전체과정 ------------------------>
+```
+
+2. 빌드 도구
+  - Build 작업을 수행하는 도구
+    - 테스트 도구 --> 테스트 수행
+    - 컴파일러 --> 컴파일 수행
+    - 디버거 --> 디버깅 수행
+    - 문서생성기 --> 문서 생성
+    - 배포파일 생성기 --> 배포 파일 생성
+
+3. 빌드 스크립트 파일
+  - 빌드의 자동화
+  - 사람이 일일이 빌드과정에 개입 필요 X
+  - 전체 과정을 자동화 시킬 수 있다.
+    - ex 소스폴더 경로, 배포파일 이름, 빌드 순서, 빌드할때 사용할 도구
+
+4. 대표적 빌드 도구
+
+```
+
+Ant ---------------> Maven -------------> gradle
+
+build.xml          pom.xml             build.gradle
+  
+```
+- Maven 등장이유
+  - 의존라이브러리 관리기능 포함
+    - 의존라이브러리(다른개발자가 만든 코드)
+    - 관리기능 : 자동 다운로드
+
+- Gradle 등자이유
+  - Xml --> Groovy 언어
+    - 프로그래밍 언어를 사용함으로 정밀하게 빌드과정 제어 가능
+    - 프로그래밍 언어에는 조건문 반복문이 있기 때문에
+
+### 소프트웨어 라이브러리 
+- 인간의 도서관 --> 책
+- S/W 도서관 --> 컴파일된 코드 or 날 것의 코드
+
+## 5일차(11.20)
+
+### Gradle
+
+- 자바 컴파일
+  - $java -d bin src/Hello.java (소스파일 경로)
+    - -d bin (zjavkdlf) 
+
+- 바이트코드 파일
+  - $java -cp(-classpath) bin Hello(.class파일 있는 경로)
+
+### git 저장소
+
+- 프로젝트 폴더
+```
+한가지 폴더의 하나의 프로젝트
+
+-mystudy/
+     -src/
+
+```
+
+- 여러개의 프로젝트 폴더
+```
+메인 프로젝트 1 서브프로젝트 여러개
+
+ mystudy/
+    - 프로젝트 A/    <--- main 프로젝트
+        -src/
+    - 프로젝트 B/    <--- Sub 프로젝트 1
+        -src/
+    - 프로젝트 C/    <--- Sub 프로젝트 2
+        -src/
+```
+
+- Maven 표준 프로젝트 디렉토리(폴더) 구조
+  - 자동생성 - $gradle init
+```
+- 자동생성 명령어 - $gradle init
+
+프로젝트 폴더/
+          -src/
+            -main/   <--- app 소스파일 두는 폴더
+              -java/   <--- 자바 소스파일 (.java)
+              -resources/ <--- 설정파일 (.xml, .properties)
+              -kotlin/ <--- 코틀린 소스 파일(.kt)
+
+            -test/  <--- 단위 테스트 소스 파일 폴더
+              -java/
+              -resources/
+```
+- DSL(Domain-Specific Language)
+- build.gradle(빌드 스크립트) 
+  - 특정 영역에서 사용하는 언어 
+  - ex - java, kotlin
+
+### gradle 사용법
+ - Gradle로 수행할 수 있는 작업 목록 출력
+  - gradle tasks
+  - gradle tasks --all
+
+- Gradle
+  - settings.gradle, build.gradle 파일을 일고
+  - 설정된 것을 바탕으로 실행
+
+- Gradle 빌드 스크립트 파일(build.gradle)
+  
+  - plugins{} <--실행할때 사용할 플러그인 (ID'플러그인명')
+  - repositories{} <-- 외부 라이브러리를 다운로드 받은 서버정보
+  - dependemcies{} <-- 외부 라이브러리 정보
+    - java플러그인 --> 자바소스 빌드작업을 수행
+    - Eclipse플러그인 --> Eclipse ID 관련 작업 수행
+
+- Gradle 구동
+```
+        컴파일러 사용법알아야함 (-d, -classpath)
+개발자 --------->                  ---> 컴파일 수행
+                  Java 컴파일러
+     --Gradle-->
+  Gradle의 빌드스크립트 작성방법 알아야함
+  - Gradle은 자바 컴파일러가 아니다
+```
+### Gradle 'Java' 플러그인 사용법
+1. CompileJava 
+  - 애플리케이션 소스 컴파일
+```
+프로젝트 폴더/
+        -app
+          -src/
+            -main/
+              -java/    <---이 폴더에 있는 자바소스를 컴파일
+
+        -build/
+          -classes/
+            -java/
+              -main/  <--이 폴더에 .class 파일을 둔다
+```
+
+2. ProcessResoures
+  - 실행할 때 사용한 설정파일을 빌드 폴더에 복사
+```
+프로젝트 폴더/
+        -app/
+          -src/
+            main/
+              resources/  <--이 폴더에 있는 파일을
+          
+        -build/
+          -resources/
+            -main/     <---그대로 복사
+```
+
+3. classes
+  - application 실행할 수 있도록 컴파일
+    1. compileJava 실행
+    2. ProcessResources 실행
+
+4. CompileTestJava
+  - 단위 테스트 소스 컴파일
+    1. compileJava
+    2. ProcessResources
+    3. classes
+```
+    4. src/test/java
+          컴파일
+       build/classes/java/test <--단위 테스트 .class 파일 둔다.
+```
+
+5. ProcessTestResources
+  - 단위 테스트 설정 파일 복사
+```
+/src/test/resources/*
+                              그대로 복사
+/build/resources/test/*
+```
+
+6. TestClasses
+  - 단위 테스트 관련 파일을 컴파일
+    1. compileJava
+    2. ProcessResources
+    3. classes
+    4. compileTestJava
+    5. ProcessTestResources
+
+7. Test
+  - 단위 테스트 수행
+    1. compileJava
+    2. ProcessResources
+    3. Classes
+    4. compileTestJava
+    5. ProcessTestResoures
+    6. TestClasses
+    7. Test  ---> 단위 테스트 실행후 보고서 생성 bueil/reports/tests/보고서
+
+8. jar
+  - 애플리케이션 패킹
+    1. compileJava
+    2. ProcessResources
+    3. classes
+    4. jar --> .jar 파일 생성  -build/libs/*.jar
+
+9. build
+  1. test <-- 애플리케이션 컴파일 및 단위 테스트 실행
+  2. jar <-- 배포파일 생성
+
+10. clean <-- build 폴더 삭제
+
+11. run
+  1. CompileJava
+  2. ProcessResources
+  3. Classes
+  4. Run   <--- build 스크립트 파일에 지정도니 메인클래스 실행
+
+## 자바 문법 기초
+1. 클래스 블록
+  - 클래스 블록당 .class 파일생성
+  - 컴파일 기본단위는 클래스 블록이다.
+  - 소스파일 X
+```
+                     compile
+A.java     class A{} ------> A.class
+B.java     class B1{} -----> B1.class
+
+C.java     class C1{} -----> C1.class
+           class C2{} -----> C2.class
+           class C3{} -----> C3.class
+
+- 클래스 블록당 .class 파일이 생성된다
+```
+
+2. Java 기초 문법
+  - 리터럴, 변수, 연산자, 조건문, 반복
+
+- Literal (리터럴)
+  - 데이터를 표기한 것
+```
+- 숫자 :   - 정수 : 12
+          - 부동소수점(실수) : 3.14
+- 문자   :  'A', '가'
+- 문자열 :  "A", "abc"
+- 논리   : true, false
+```
