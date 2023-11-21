@@ -507,7 +507,8 @@ Tasks -명령
   4. Run   <--- build 스크립트 파일에 지정도니 메인클래스 실행
 
 ## 자바 문법 기초
-1. 클래스 블록
+
+### 클래스 블록
   - 클래스 블록당 .class 파일생성
   - 컴파일 기본단위는 클래스 블록이다.
   - 소스파일 X
@@ -523,15 +524,205 @@ C.java     class C1{} -----> C1.class
 - 클래스 블록당 .class 파일이 생성된다
 ```
 
-2. Java 기초 문법
+1. 소스 파일과 클래스 블럭, .Class 파일 
+```
+컴파일 명령어
+$ javac -d build/classes/java/main - .class파일을 만들 목적폴더
+           src/main/java/com/eomcs/D.java - 현재 폴더
+
+com/eomcs 폴더에 있는 자바 소스를 컴파일 했는데
+목적폴더 com/eomcs 폴더에 .class 파일이 없다.
+
+-이유 : 특정 폴더에 소속된다고 지정하지 않았기 때문이다
+        루트 디렉토리의 클래스로 간주된다
+        위 명령어 처럼 목적 폴더를 메인으로 지정했기때문에
+
+```
+### 패키지
+  - 클래스가 소속된 그룹
+  - 디렉토리로 다룬다
+  - 클래스 역할에 따라 관리하기 위해서
+  - 소스 코드 정리정돈
+    - 도서관에서 분류에 따라 책을 찾기 쉽게
+```
+패키지 문법
+package 파일명; ex) com.eomcs;
+class E1{}
+class E2{}
+
+JVM 실행할 때 classpath를 실행한다.
+class 파일 경로는 목적파일까지만 지정
+실핼 할때 반드시 패키지명 지정
+
+JVM명령어
+$java -d (목적폴더 생성지점까지) -->.class파일 만들곳
+  ex)java -d build/classes/java/main
+
+$java -classpath (.class파일이 있는 목적폴더 까지) (패키지명 .으로 표시)
+  ex)java -classpath build/classes/java main com.eomcs.E1
+
+```
+1. 패키지 작성 관례
+  - 패키지 이름은 도메인명을 보통 사용
+    - 개발자간,회사간, 이름충돌 방지
+  - 도메인명을 거꾸로 사용
+    - 상위에서 하위로 분류하기 쉽게
+```
+  도메인명 ----->제품명----->역할명
+com.microsoft.   msword.    checker
+```
+2. 패키지와 공개 여부
+- 공개여부와 상관없이 같은 패키지에 소속된 경우 접근 가능
+  - 패키지 멤버 클래스
+
+-접근 가능 예시
+```
+- 같은 eomcs 패키지에 있기 때문에 공개여부 상관없이 접근가능
+
+src/main/java/
+           |-com
+             |-eomcs/
+                |-F.java
+                     classF1{}
+                     classF2{}
+                |-Test.java
+                     classTest{}
+
+```
+- 접근 불가 예시
+```
+- 다른 패키지에서 공개되지않은 클래스는 접근 불가
+
+src/main/java/
+           |  |-com
+           |    |-eomcs/
+           |       |-F.java
+           |            classF1{}
+           |            classF2{}
+           |
+           |-Test.java
+                   class Test{}
+
+```
+
+3. 패키지와 공개여부,파일명
+  - 공개 클래스는 소스 파일명이 반드시 같아야한다
+    - 유지보수할때 소스파일을 찾기 쉽도록 하기위해
+  - 공개클래스는 파일당 하나
+```
+src/main/java/
+           |  |-com
+           |    |-eomcs/
+           |       |-F1.java      <-- 공개클래스와 파일명 같아야함
+           |            pubilc classF1{}
+           |            classF2{}
+           |
+           |-Test.java
+                   class Test{}
+
+```
+4. 패키지 결론
+- 1개 소스파일 - 1개의 클래스 블록(공개여부 상관없이) <= 일반적경우
+- 소스파일명 = 클래스 블록 이름
+  - 유지보수가 쉽고, 클래스가 정의된 소스파일을 찾기 쉽다
+
+### main() 메서드 -프로그램 entry point(진입점,입구)
+$java Hello
+  1. Classpath에 지정된 경로에서 Hello.class 파일을 찾는다
+  2. .class 파일의 Bytecode를 검증한다.
+  3. main() 메서드 실행
+
+```
+문구
+class Test3 {
+  public static void main(String[] args){
+    //프로그램 엔트리 포인트(entry point; 진입점)
+    System.out.println("Hello!");
+  }
+}
+```
+## Java 기초 문법
   - 리터럴, 변수, 연산자, 조건문, 반복
 
 - Literal (리터럴)
   - 데이터를 표기한 것
+
 ```
 - 숫자 :   - 정수 : 12
           - 부동소수점(실수) : 3.14
 - 문자   :  'A', '가'
 - 문자열 :  "A", "abc"
 - 논리   : true, false
+```
+### 주석 사용법
+- Comments / JavadocComments / Annotation
+
+- java doc 주석
+  - 표기 /**     */
+  - API문서 ->개발자가 작성한 코드의 사용법을 설명한 문서
+```
+문법
+
+/** 클래스설명 */
+class A{                 javadoc실행
+/** 변수설명 */         ----------->      HTML문서
+int a;
+/** 메서드 본명 */                         
+void m(){___}
+}
+
+```
+- javadoc 등장전
+
+```
+개발자 
+1. 소스파일 작성 ex) .java .c
+2. API 문서 작성 ex) .doc .ppt
+3. 소스파일 변경
+4. API 문서 변경
+```
+  - 문제점: 
+    - 소스코드를 바꾸면 API문서도 그에 맞춰 변경해야하지만 개발자들이 귀찮아서 안하는게 현실
+    - 코드와 문서가 일치하지 않는 문제 발생!
+
+  - 해결 방법
+    - 소스+문서 결합 -->문서 생성 자동화 ex)Javadoc
+
+- Annotaion(애노테이션)
+  1. 컴파일할때 사용
+  2. 실행할 때 사용
+  3. 다른 문서 생성할 때 사용
+```
+문법 예시
+
+ 소스파일                      컴파일             .class파일
+
+/* 일반주석 */               버린다
+
+/** javadoc 주석*/    -->   javadoc->HTML삽입
+
+@애노테이션 주석        ----------------------------->포함
+
+
+```
+### IDE(Intergratde Development Environment : 통합 개발 환경)
+- IDE 
+  - 편집기
+  - 위저드기능의 자동화 도구
+  - Ex) Eclipse, Inteli J, NetBeans
+-단순 에디터
+  - Ex) 메모장, VI,Nano
+- VS Code
+  - 플러그인을 사용한 반자동 IDE도구
+```
+ex)
+
+메모장,vi         VSCODE               Eclipse
+
+단순 에디터  -------------------------> IDE---> JDk, git,개발도구
+                    |                                                    |                                             
+                    |----> +컴파일,실행,디버깅,테스팅,패킹,버전관리 등 개발의 전반적 작업을 해당도구를 사용해서 처리해준다                                                   
+
+단순에디터
+Ex)메모장,VI,Nano
 ```
