@@ -393,7 +393,7 @@ build.xml          pom.xml             build.gradle
 
 - Gradle 빌드 스크립트 파일(build.gradle)
   
-  - plugins{} <--실행할때 사용할 플러그인 (ID'플러그인명')
+  - plugins{} <--실행할때 사용할 플러그인 (ID'플러그인명') // application = java + 실행과 관련된 테스크
   - repositories{} <-- 외부 라이브러리를 다운로드 받은 서버정보
   - dependemcies{} <-- 외부 라이브러리 정보
     - java플러그인 --> 자바소스 빌드작업을 수행
@@ -409,6 +409,13 @@ build.xml          pom.xml             build.gradle
   - Gradle은 자바 컴파일러가 아니다
 ```
 ### Gradle 'Java' 플러그인 사용법
+
+```
+Tasks -명령
+- compileJava, ProcessResources, Classes
+- CompileTestJava, ProcessTestResource, TestClasses
+- Test, jar, build, clean
+```
 1. CompileJava 
   - 애플리케이션 소스 컴파일
 ```
