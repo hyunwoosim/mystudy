@@ -17,12 +17,13 @@ Gradle --구성--> Java-basic (Root Project)/
 ```
 1. $cd(폴더명) -생성할 폴더로 들어간다
 2. $mkdir (파일명) -메인 프로젝트 파일명 작성
-3. $gradle init - Eclipes가사 사용하는 설정파일 자동생성
-4. build.gradle 들어가서 플러그인 수정
+3. $cd(폴더명) 생성파일로 이동
+4. $gradle init - Eclipes가사 사용하는 설정파일 자동생성
+5. build.gradle 들어가서 플러그인 수정
   - id 'eclipse' - 플러그인을 수정해야 eclipse 사용가능
   - ecipse{ ~~~} - 전용플러그인 문법
-5.gradle eclipse - 수정한 것을 적용(수정할 때마다 해야한다.)
-6.Eclipse에 들어가 
+6.gradle eclipse - 수정한 것을 적용(수정할 때마다 해야한다.)
+7.Eclipse에 들어가서
    - improt-->general/Exisiting Projects into Workspace -->
    finish
 ```
