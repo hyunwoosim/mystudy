@@ -559,7 +559,7 @@ $java -d (목적폴더 생성지점까지) -->.class파일 만들곳
   ex)java -d build/classes/java/main
 
 $java -classpath (.class파일이 있는 목적폴더 까지) (패키지명 .으로 표시)
-  ex)java -classpath build/classes/java main com.eomcs.E1
+  ex)java -classpath build/classes/java/main com.eomcs.E1
 
 ```
 1. 패키지 작성 관례
