@@ -40,7 +40,7 @@ public class Exam002 {
       printStar(starLen);
       // 출력 줄 바꾸기
       System.out.println();
-      starLen += 2;
+
     }
   }
 }
