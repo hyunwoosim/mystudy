@@ -44,7 +44,7 @@ public class Exam001 {
       printSpaces(computeSpaceLength(len, starLen));
       printStars(starLen);
       System.out.println();
-      starLen += 2;
+
     }
   }
 }
