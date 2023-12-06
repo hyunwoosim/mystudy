@@ -2,11 +2,8 @@ package bitcamp.myapp;
 
 public class BoardMenu {
 
-    static String title;
-    static String content;
-    static String wirter;
-    static String date;
-
+    static Board[] boards = new Board[3];
+    static int length = 0;
 
     static void printMenu() {
         System.out.println("[게시글]");
@@ -14,6 +11,7 @@ public class BoardMenu {
         System.out.println("2. 조회");
         System.out.println("3. 변경");
         System.out.println("4. 삭제");
+        System.out.println("5. 목록");
         System.out.println("0. 이전");
     }
 
@@ -21,7 +19,7 @@ public class BoardMenu {
     static void execute() {
         printMenu();
 
-        loop2:
+        loop:
         while (true) {
             String input = Prompt.input("메인/게시글> ");
 
@@ -30,16 +28,19 @@ public class BoardMenu {
                     add();
                     break;
                 case "2":
-                    content();
+                    view();
                     break;
                 case "3":
-                    writer();
+                    modify();
                     break;
                 case "4":
-                    date();
+                    delete();
+                    break;
+                case "5":
+                    list();
                     break;
                 case "0":
-                    break loop2;
+                    break loop;
                 case "menu":
                     printMenu();
                     break;
@@ -51,36 +52,86 @@ public class BoardMenu {
 
     static void add() {
         System.out.println("게시글 제목: ");
-        title = Prompt.input("제목? ");
-        content = Prompt.input("내용? ");
-        wirter = Prompt.input("작성자? ");
-        date = Prompt.input("작성일 ");
 
+        if (length == boards.length) {
+            int oldSize = boards.length;
+            int newSize = oldSize + (oldSize >> 1);
+
+            Board[] arr = new Board[newSize];
+            for (int i = 0; i < oldSize; i++) {
+                arr[i] = boards[i];
+                boards = arr;
+            }
+        }
+
+        Board board = new Board();
+        board.title = Prompt.input("제목? ");
+        board.content = Prompt.input("내용? ");
+        board.wirter = Prompt.input("작성자? ");
+        board.createdDate = Prompt.input("작성일 ");
+
+        boards[length] = board;
+        length++;
     }
 
-    static void content() {
+    static void view() {
         System.out.println("게시글 조회: ");
-        System.out.printf("제목 %s\n", title);
-        System.out.printf("내용 %s\n", content);
-        System.out.printf("작성자 %s\n", wirter);
-        System.out.printf("작성일 %s\n", date);
+
+        int index = Integer.parseInt(Prompt.input("번호?"));
+        if (index < 0 || index >= length) {
+            System.out.println("과제 번호가 유효하지 않습니다.");
+            return;
+        }
+        Board board = boards[index];
+        System.out.printf("제목: %s\n ", board.title);
+        System.out.printf("내용: %s\n ", board.content);
+        System.out.printf("작성자: %s\n", board.wirter);
+        System.out.printf("제출 마감일: %s\n ", board.createdDate);
 
     }
 
-    static void writer() {
+    static void list() {
+        System.out.println("과제 목록:");
+        System.out.printf("%-20s\t%-20s\t%s\n", "제목", "작성자", "작성일");
+
+        for (int i = 0; i < length; i++) {
+            Board board = boards[i];
+            System.out.printf("%-20s\t%-20s\t%s\n", board.title, board.wirter, board.createdDate);
+        }
+    }
+
+
+    static void modify() {
         System.out.println("게시글 변경: ");
-        title = Prompt.input("제목(%s)?", title);
-        content = Prompt.input("내용(%s)?", content);
-        wirter = Prompt.input("작성자(%s)?", wirter);
-        date = Prompt.input("작성일(%s)?", date);
+
+        int index = Integer.parseInt(Prompt.input("번호? "));
+        if (index < 0 || index >= length) {
+            System.out.println("게시글 번호가 유효하지 않습니다.");
+            return;
+        }
+
+        Board board = boards[index];
+        board.title = Prompt.input("제목(%s)?", board.title);
+        board.content = Prompt.input("내용(%s)?", board.content);
+        board.wirter = Prompt.input("작성자(%s)?", board.wirter);
+        board.createdDate = Prompt.input("작성일(%s)?", board.createdDate);
+
     }
 
-    static void date() {
-        System.out.println("게시글 삭제: ");
-        title = "";
-        content = "";
-        wirter = "";
-        date = "";
 
+    static void delete() {
+        System.out.println("게시글 삭제: ");
+
+        int index = Integer.parseInt(Prompt.input("번호? "));
+        if (index < 0 || index >= length) {
+            System.out.println("과제 번호가 유효하지 않습니다.");
+            return;
+        }
+
+        for (int i = index; i < (length - 1); i++) {
+            boards[i] = boards[i + 1];
+        }
+        length--;
+        boards[length] = null;
     }
 }
