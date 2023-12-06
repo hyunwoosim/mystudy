@@ -44,7 +44,7 @@ application {
 */
 application {
     // Define the main class for the application.
-    mainClass = 'bitcamp.myapp.Subapp2'
+    mainClass = 'bitcamp.myapp.App'
 }
 
 tasks.named('test') {
