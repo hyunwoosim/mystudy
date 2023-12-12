@@ -10,22 +10,23 @@ import bitcamp.util.Prompt;
 //
 public class BoardDeleteHandler implements MenuHandler {
 
-    BoardRepository boardRepository;
-    Prompt prompt;
+  BoardRepository boardRepository;
+  Prompt prompt;
 
-    public BoardDeleteHandler(BoardRepository boardRepository, Prompt prompt) {
-        this.boardRepository = boardRepository;
-        this.prompt = prompt;
+  public BoardDeleteHandler(BoardRepository boardRepository, Prompt prompt) {
+    this.boardRepository = boardRepository;
+    this.prompt = prompt;
+  }
+
+  @Override
+  public void action(Menu menu) {
+    System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
+
+    int index = this.prompt.inputInt("번호? ");
+    Board deleted = this.boardRepository.remove(index)
+    
+    if (this.boardRepository.remove(index) == null) {
+      System.out.println("게시글 번호가 유효하지 않습니다.");
     }
-
-    @Override
-    public void action(Menu menu) {
-        System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
-
-        int index = this.prompt.inputInt("번호? ");
-        if (this.boardRepository.remove(index) == null) {
-            System.out.println("게시글 번호가 유효하지 않습니다.");
-            return;
-        }
-    }
+  }
 }
