@@ -5,36 +5,64 @@ class Car {
   String maker;
   String model;
   int cc;
-  void run() {System.out.println("자동차가 달린다!");}
+
+  void run() {
+    System.out.println("자동차가 달린다!");
+  }
 }
+
 
 class Sedan extends Car {
   boolean sunroof;
-  public void openSunroof() {sunroof = true;}
-  public void closeSunroof() {sunroof = false;}
+
+  public void openSunroof() {
+    sunroof = true;
+  }
+
+  public void closeSunroof() {
+    sunroof = false;
+  }
+
   @Override
-  void run() {System.out.println("승용차가 달린다!");}
+  void run() {
+    System.out.println("승용차가 달린다!");
+  }
 }
+
 
 class Truck extends Car {
   int weight;
-  public void dump() {weight = 0;}
+
+  public void dump() {
+    weight = 0;
+  }
+
   @Override
-  void run() {System.out.println("트럭이 달린다!");}
+  void run() {
+    System.out.println("트럭이 달린다!");
+  }
 }
+
 
 class DumpTruck extends Truck {
   @Override
-  public void dump() {weight = 0;}
+  public void dump() {
+    weight = 0;
+  }
+
   @Override
-  void run() {System.out.println("덤프트럭이 달린다!");}
+  void run() {
+    System.out.println("덤프트럭이 달린다!");
+  }
 }
+
 
 class CarFactory {
   Car makeCar() {
     return new Car();
   }
 }
+
 
 class SedanFactory extends CarFactory {
   // 메서드를 오버라이딩 할 때 리턴 타입으로 서브 클래스도 가능하다.
@@ -44,6 +72,7 @@ class SedanFactory extends CarFactory {
   };
 }
 
+
 class TruckFactory extends CarFactory {
   // 메서드를 오버라이딩 할 때 리턴 타입으로 서브 클래스도 가능하다.
   @Override
@@ -51,6 +80,7 @@ class TruckFactory extends CarFactory {
     return new Truck();
   };
 }
+
 
 class DumpTruckFactory extends TruckFactory {
   // 메서드를 오버라이딩 할 때 리턴 타입으로 서브 클래스도 가능하다.
@@ -60,14 +90,15 @@ class DumpTruckFactory extends TruckFactory {
   };
 }
 
+
 class DumpTruckFactory2 extends TruckFactory {
   // 메서드를 오버라이딩 할 때 리턴 타입으로 수퍼 클래스는 불가능하다.
   // => 컴파일 오류!
   //
-  //  @Override
-  //  Car makeCar() {
-  //    return new Car();
-  //  };
+  // @Override
+  // Car makeCar() {
+  // return new Car();
+  // };
 }
 
 
@@ -80,11 +111,5 @@ public class Exam0620 {
     new DumpTruckFactory2().makeCar().run();
   }
 }
-
-
-
-
-
-
 
 
