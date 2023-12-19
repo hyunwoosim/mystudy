@@ -1,39 +1,35 @@
 package bitcamp.myapp.handler.member;
 
-import bitcamp.menu.Menu;
-import bitcamp.menu.MenuHandler;
+import bitcamp.menu.AbstractMenuHandler;
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.AnsiEscape;
 import bitcamp.util.Prompt;
+import java.util.ArrayList;
 
-public class MemberModifyHandler implements MenuHandler {
+public class MemberModifyHandler extends AbstractMenuHandler {
 
-    Prompt prompt;
-    MemberRepository memberRepository;
+    private ArrayList<Member> objectRepository;
 
-    public MemberModifyHandler(MemberRepository memberRepository, Prompt prompt) {
-        this.memberRepository = memberRepository;
-        this.prompt = prompt;
+    public MemberModifyHandler(ArrayList<Member> objectRepository, Prompt prompt) {
+        super(prompt);
+        this.objectRepository = objectRepository;
     }
 
     @Override
-    public void action(Menu menu) {
-        System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
+    protected void action() {
 
         int index = this.prompt.inputInt("번호? ");
-        Member oldmember = this.memberRepository.get(index);
-
-        if (this.memberRepository.get(index) == null) {
+        Member old = this.objectRepository.get(index);
+        if (old == null) {
             System.out.println("회원 번호가 유효하지 않습니다.");
             return;
         }
 
         Member member = new Member();
-        member.email = this.prompt.input("이메일(%s)? ", oldmember.email);
-        member.name = this.prompt.input("이름(%s)? ", oldmember.name);
-        member.password = this.prompt.input("새 암호? ");
-        member.createdDate = this.prompt.input("가입일(%s)? ", oldmember.createdDate);
+        member.setEmail(this.prompt.input("이메일(%s)? ", old.getEmail()));
+        member.setName(this.prompt.input("이름(%s)? ", old.getName()));
+        member.setPassword(this.prompt.input("새 암호? "));
+        member.setCreatedDate(this.prompt.input("가입일(%s)? ", old.getCreatedDate()));
 
-        this.memberRepository.set(index, member);
+        this.objectRepository.set(index, member);
     }
 }

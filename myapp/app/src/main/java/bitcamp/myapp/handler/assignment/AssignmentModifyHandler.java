@@ -1,40 +1,35 @@
 package bitcamp.myapp.handler.assignment;
 
-import bitcamp.menu.Menu;
-import bitcamp.menu.MenuHandler;
+import bitcamp.menu.AbstractMenuHandler;
 import bitcamp.myapp.vo.Assignment;
-import bitcamp.util.AnsiEscape;
 import bitcamp.util.Prompt;
+import java.util.ArrayList;
 
-public class AssignmentModifyHandler implements MenuHandler {
+public class AssignmentModifyHandler extends AbstractMenuHandler {
 
-    Prompt prompt;
-    AssignmentRepository assignmentRepository;
+    private ArrayList<Assignment> objectRepository;
 
 
-    public AssignmentModifyHandler(AssignmentRepository assignmentRepository, Prompt prompt) {
-        this.assignmentRepository = assignmentRepository;
-        this.prompt = prompt;
+    public AssignmentModifyHandler(ArrayList<Assignment> objectRepository, Prompt prompt) {
+        super(prompt);
+        this.objectRepository = objectRepository;
     }
 
     @Override
-    public void action(Menu menu) {
-        System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
+    protected void action() {
 
         int index = this.prompt.inputInt("번호? ");
-        Assignment oldassignment = this.assignmentRepository.get(index);
-
-        if (oldassignment == null) {
+        Assignment old = this.objectRepository.get(index);
+        if (old == null) {
             System.out.println("과제 번호가 유효하지 않습니다.");
             return;
         }
 
         Assignment assignment = new Assignment();
-        assignment.title = this.prompt.input("과제명(%s)? ", oldassignment.title);
-        assignment.content = this.prompt.input("내용(%s)? ", oldassignment.content);
-        assignment.deadline = this.prompt.input("제출 마감일(%s)? ", oldassignment.deadline);
+        assignment.setTitle(this.prompt.input("과제명(%s)? ", old.getTitle()));
+        assignment.setContent(this.prompt.input("내용(%s)? ", old.getContent()));
+        assignment.setDeadline(this.prompt.input("제출 마감일(%s)? ", old.getDeadline()));
 
-        this.assignmentRepository.set(index, assignment);
+        this.objectRepository.set(index, assignment);
     }
-
 }
