@@ -1,33 +1,26 @@
 package bitcamp.myapp.handler.assignment;
 
-import bitcamp.menu.Menu;
-import bitcamp.menu.MenuHandler;
+import bitcamp.menu.AbstractMenuHandler;
 import bitcamp.myapp.vo.Assignment;
-import bitcamp.util.AnsiEscape;
 import bitcamp.util.Prompt;
+import java.util.ArrayList;
 
-public class AssignmentDeleteHandler implements MenuHandler {
+public class AssignmentDeleteHandler extends AbstractMenuHandler {
 
-    Prompt prompt;
-    AssignmentRepository assignmentRepository;
+    private ArrayList<Assignment> objectRepository;
 
 
-    public AssignmentDeleteHandler(AssignmentRepository assignmentRepository, Prompt prompt) {
-        this.assignmentRepository = assignmentRepository;
-        this.prompt = prompt;
+    public AssignmentDeleteHandler(ArrayList<Assignment> objectRepository, Prompt prompt) {
+        super(prompt);
+        this.objectRepository = objectRepository;
     }
 
     @Override
-    public void action(Menu menu) {
-        System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
+    protected void action() {
 
         int index = this.prompt.inputInt("번호? ");
-        Assignment assignment = this.assignmentRepository.remove(index);
-
-        if (this.assignmentRepository.remove(index) == null) {
+        if (this.objectRepository.remove(index) == null) {
             System.out.println("과제 번호가 유효하지 않습니다.");
-            return;
         }
-
     }
 }
