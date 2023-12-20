@@ -40,6 +40,8 @@ public class Exam0131 {
     int gender;
     boolean working;
 
+
+
     @Override
     public boolean equals(Object obj) {
       if (this == obj)
@@ -53,13 +55,11 @@ public class Exam0131 {
           && Objects.equals(name, other.name) && Objects.equals(tel, other.tel)
           && working == other.working;
     }
+
+
+
   }
 
 }
-
-
-
-
-
 
 
