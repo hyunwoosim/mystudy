@@ -15,6 +15,7 @@ public class Exam0125 {
     // System.out.println(s1.equals(s2));
     //
     System.out.println(b1.toString().equals(b2.toString()));
+    
   }
 }
 
