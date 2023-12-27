@@ -4,40 +4,40 @@ import java.util.Date;
 
 public class Board {
 
-    private String title;
-    private String content;
-    private String writer;
-    private Date createdDate;
+  private String title;
+  private String content;
+  private String writer;
+  private Date createdDate;
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public String getContent() {
-        return content;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+  public void setContent(String content) {
+    this.content = content;
+  }
 
-    public String getWriter() {
-        return writer;
-    }
+  public String getWriter() {
+    return writer;
+  }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
+  public void setWriter(String writer) {
+    this.writer = writer;
+  }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
+  public Date getCreatedDate() {
+    return createdDate;
+  }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
 }

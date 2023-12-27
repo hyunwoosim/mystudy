@@ -10,31 +10,24 @@ import java.util.ArrayList;
 //
 public class BoardListHandler extends AbstractMenuHandler {
 
-    private ArrayList<Board> objectRepository;
+  private ArrayList<Board> objectRepository;
 
-    public BoardListHandler(ArrayList<Board> objectRepository, Prompt prompt) {
-        super(prompt);
-        this.objectRepository = objectRepository;
+  public BoardListHandler(ArrayList<Board> objectRepository, Prompt prompt) {
+    super(prompt);
+    this.objectRepository = objectRepository;
+  }
+
+  @Override
+  protected void action() {
+    System.out.printf("%-20s\t%10s\t%s\n", "Title", "Writer", "Date");
+
+    Board[] boards = this.objectRepository.toArray(new Board[0]);
+
+    for (Board board : boards) {
+      System.out.printf("%-20s\t%10s\t%3$tY-%3$tm-%3$td\n",
+          board.getTitle(),
+          board.getWriter(),
+          board.getCreatedDate());
     }
-
-    @Override
-    protected void action() {
-
-        System.out.printf("%-20s\t%10s\t%s\n", "Title", "Writer", "Date");
-
-        // Repository 에 보관된 목록을 배열로 리턴 받기
-        // 방법1)
-//    Board[] boards = new Board[this.objectRepository.size()];
-//    this.objectRepository.toArray(boards);
-
-        // 방법2)
-        Board[] boards = this.objectRepository.toArray(new Board[0]);
-
-        for (Board board : boards) {
-            System.out.printf("%-20s\t%10s\t%3$tY-%3$tm-%3$td\n",
-                board.getTitle(),
-                board.getWriter(),
-                board.getCreatedDate());
-        }
-    }
+  }
 }
