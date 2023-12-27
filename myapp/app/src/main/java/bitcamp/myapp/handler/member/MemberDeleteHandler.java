@@ -7,18 +7,16 @@ import java.util.ArrayList;
 
 public class MemberDeleteHandler extends AbstractMenuHandler {
 
-    private ArrayList<Member> objectRepository;
+  private ArrayList<Member> objectRepository;
 
-    public MemberDeleteHandler(ArrayList<Member> objectRepository, Prompt prompt) {
-        super(prompt);
-        this.objectRepository = objectRepository;
-    }
+  public MemberDeleteHandler(ArrayList<Member> objectRepository, Prompt prompt) {
+    super(prompt);
+    this.objectRepository = objectRepository;
+  }
 
-    @Override
-    protected void action() {
-
-        int index = this.prompt.inputInt("번호? ");
-        this.objectRepository.remove(index);
-    }
+  @Override
+  protected void action() {
+    int index = this.prompt.inputInt("번호? ");
+    this.objectRepository.remove(index);
+  }
 }
-
