@@ -1,43 +1,63 @@
 package bitcamp.myapp.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Board {
+public class Board implements Serializable, CsvString {
 
-  private String title;
-  private String content;
-  private String writer;
-  private Date createdDate;
+    private static final long serialVersionUID = 100L;
 
-  public String getTitle() {
-    return title;
-  }
+    private String title;
+    private String content;
+    private String writer;
+    private Date createdDate;
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public static Board createFromCsv(String csv) {
+        String[] values = csv.split(",");
+        Board obj = new Board();
+        obj.setTitle(values[0]);
+        obj.setContent(values[1]);
+        obj.setWriter(values[2]);
+        obj.setCreatedDate(new Date(Long.valueOf(values[3])));
+        return obj;
+    }
 
-  public String getContent() {
-    return content;
-  }
+    @Override
+    public String toCsvString() {
+        return String.format("%s,%s,%s,%d",
+            this.title, this.content, this.writer,
+            this.createdDate.getTime());
+    }
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public String getWriter() {
-    return writer;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public void setWriter(String writer) {
-    this.writer = writer;
-  }
+    public String getContent() {
+        return content;
+    }
 
-  public Date getCreatedDate() {
-    return createdDate;
-  }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-  public void setCreatedDate(Date createdDate) {
-    this.createdDate = createdDate;
-  }
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 }
