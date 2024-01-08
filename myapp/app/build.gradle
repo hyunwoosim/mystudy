@@ -21,6 +21,10 @@ repositories {
 // 키보드 입력을 표준 입력 스트림으로 연결하는 방법
 
 dependencies {
+    // JSON 라이브러리
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
 

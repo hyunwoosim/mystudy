@@ -3,7 +3,7 @@ package bitcamp.myapp.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Assignment implements Serializable, CsvString {
+public class Assignment implements Serializable {
 
     private static final long serialVersionUID = 100L;
 
@@ -21,10 +21,6 @@ public class Assignment implements Serializable, CsvString {
         return obj;
     }
 
-    @Override
-    public String toCsvString() {
-        return String.format("%s,%s,%s", this.title, this.content, this.deadline);
-    }
 
     public String getTitle() {
         return title;
