@@ -4,6 +4,7 @@
 package algorithm.test;
 
 import org.junit.jupiter.api.Test;
+import algorithm.test.baekjoon.level01.App;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
