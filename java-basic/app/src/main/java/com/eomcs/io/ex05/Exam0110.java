@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 public class Exam0110 {
 
   public static void main(String[] args) throws Exception {
-    FileOutputStream out = new FileOutputStream("temp/test4.data");
+    FileOutputStream out = new FileOutputStream("temp/jls21.pdf");
 
     Member member = new Member();
     member.name = "AB가각간";
