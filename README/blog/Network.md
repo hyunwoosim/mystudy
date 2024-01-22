@@ -95,12 +95,24 @@ Socket socket = new Socket("IP,8888);
 ```
 
 ## UDP
-- 발시잔가 수시잔에게 일방적으로 데이터를 보낸다.
+- 발시자가 수시자에게 일방적으로 데이터를 보낸다.
 - 연결과정이 없기때문에 TCP보다 빠르지만 
 - 데이터 송신을 보장하지 않는다. 신뢰성이 낮다.
 - 이유는 TCP처럼 고정회선이 아닌 여려회선으로 보내기 때문에
 - 데이터가 순선대로 전달되지 않거나, 잘못된 회선으로 데이터 손실이 발생 할 수 있다.
 - 예) 편지, 실시간 영상 스트리밍
+
+- UDP 서버를 위한 DatagramSocket 객체를 생성할 때는 port번호를 생성자 매개값으로 제공해야한다.
+
+## receive()
+- 데이터를 수신할 때까지 블로킹되고, 데이터가 수신되면 저장한다.
+
+## DatagramSocket 
+- 발신점과 수신점
+
+## DatagramPacket
+- 주고 받는 데이터
+
 
 
 ## 네트워크에서 많이 사용되는 용어 문법
@@ -166,4 +178,58 @@ ID = 123 결과값 = 100
 123, 300
 
 이런 방식으로 클라이언트르 찾을 수 있다.
+```
+
+## HTTP(Hyper-Text Transfer Protocol)
+- 클라이언트와 서버사이의 일어나는 요청/응답 프로토콜이다.
+  - 프로토콜이란? 
+    - 클라이언트와 서버간의 통신 규칙
+    - 데이터를 주고받는 규칙
+- 전달되는 자료는 URL로 조회할 수 있다.
+- 자료는 HTML형식이다.
+
+## HTTP = web
+- 요청하는 곳 : HTTP Client = Web Browsers
+  - 대표적으로 : Chorme, Edge, Safari, Firefox ---> GUI
+  -           wget, curl ---> CLI
+
+- 응답하는 곳 : HTTP Server = Web Server
+  - Apache HTTP Server, IIS, NginX
+
+## HTTPS(Hyper Text Transfer Protocol over Secure Socket Layer)
+- HTTP의 보안이 강화된 버전이다.
+- HTTP를 통해 주고받는 HTML정보를 암호화시켜 데이터를 보호하는 것이다.
+
+
+## URI/URL/URN
+- URL,URN을 합쳐 URI라고 부른다.
+```
+URI - URL
+    - URN
+```
+## URL(Uniform Resource Locator)
+- 웹 상에서 자원의 위치를 표현하는 방법
+  - [프로토콜]://서버주소:포트번호/자원의경로?파라미터명=값&파라미터명=값
+  - 프로토콜 : http(80),https(443)를 말한다.
+  - 서버 주소 : IP주소, 도메인명(www.naver.com)
+  - 포트 번호 : 프로토콜의 포트 번호이다. 생략가능하다.
+  - 자원의 경로 : board list, search naver
+  - 파라미터명 = 값 : 서버에 보내는 파라미터
+
+- 자원이란?
+    - 정적자원(static) 요청할 때 마다 결과가 변경되지않는 자원
+      - ex) HTML,JPEG,GIF
+    - 동적자원(dynamic) 요청할 때 마다 결과가 변할 수 있는 자원
+      - ex) 카페 전체글 게시판
+
+## Base 64란
+- 바이너리 데이터를 문자화 시키는 방식
+- URL은 텍스트이다.
+- 그렇기 때문에 바이너리 데이터를 포함할 수 없다.
+- 바이너리 데이터는 JPEG, MP3, PPT등이 있다.
+- 바이너리 데이터를 Base64를 사용하여 문자화 시킨다.
+- Base 64는 (영어대소문자, 숫자 , +, /)로 변환 가능하다.
+- 64진수를 만들어 Base 64표를 보고 문자화 시킨다.
+```
+데이터 --인코딩--> Base 64 --디코딩--> 데이터
 ```
