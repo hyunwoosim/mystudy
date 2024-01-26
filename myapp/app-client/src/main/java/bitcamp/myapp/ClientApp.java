@@ -3,8 +3,10 @@ package bitcamp.myapp;
 import bitcamp.menu.MenuGroup;
 import bitcamp.myapp.dao.AssignmentDao;
 import bitcamp.myapp.dao.BoardDao;
-import bitcamp.myapp.dao.DaoProxyGenerator;
 import bitcamp.myapp.dao.MemberDao;
+import bitcamp.myapp.dao.mysql.AssignmentDaoImpl;
+import bitcamp.myapp.dao.mysql.BoardDaoImpl;
+import bitcamp.myapp.dao.mysql.MemberDaoImpl;
 import bitcamp.myapp.handler.HelpHandler;
 import bitcamp.myapp.handler.assignment.AssignmentAddHandler;
 import bitcamp.myapp.handler.assignment.AssignmentDeleteHandler;
@@ -22,6 +24,8 @@ import bitcamp.myapp.handler.member.MemberListHandler;
 import bitcamp.myapp.handler.member.MemberModifyHandler;
 import bitcamp.myapp.handler.member.MemberViewHandler;
 import bitcamp.util.Prompt;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class ClientApp {
 
@@ -36,7 +40,7 @@ public class ClientApp {
 
 
     ClientApp() {
-        prepareNetwork();
+        prepareDatabase();
         prepareMenu();
     }
 
@@ -45,14 +49,19 @@ public class ClientApp {
         new ClientApp().run();
     }
 
-    void prepareNetwork() {
+    void prepareDatabase() {
         try {
-            DaoProxyGenerator daoGenerator = new DaoProxyGenerator("192.168.0.56", 8888);
+            // JVM이 JDBC 드라이버 파일(.jar)에 설정된대로 자동으로 처리한다.
+//            Driver driver = new com.mysql.jdbc.Driver();
+//            DriverManager.registerDriver(driver);
 
-            boardDao = daoGenerator.create(BoardDao.class, "board");
-            greetingDao = daoGenerator.create(BoardDao.class, "greeting");
-            assignmentDao = daoGenerator.create(AssignmentDao.class, "assignment");
-            memberDao = daoGenerator.create(MemberDao.class, "member");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/studydb", "study",
+                "Bitcamp!@#123");
+
+            boardDao = new BoardDaoImpl(con, 1);
+            greetingDao = new BoardDaoImpl(con, 2);
+            assignmentDao = new AssignmentDaoImpl(con);
+            memberDao = new MemberDaoImpl(con);
 
         } catch (Exception e) {
             System.out.println("통신 오류!");
