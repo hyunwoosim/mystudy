@@ -25,7 +25,7 @@ java {
 }
 
 application {
-    mainClass = 'wooapp.app'
+    mainClass = 'wooapp.ClientApp'
 }
 
 tasks.named('test') {
