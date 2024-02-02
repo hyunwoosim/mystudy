@@ -4,11 +4,10 @@
 package wooapp;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-class AppTest {
+class ClientAppTest {
     @Test void appHasAGreeting() {
-        App classUnderTest = new App();
+        ClientApp classUnderTest = new ClientApp();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
 }
