@@ -7,7 +7,7 @@ import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-public class MyDriver implements java.sql.Driver {
+public class MYDriver implements java.sql.Driver {
 
   static {
     System.out.println("MyDriver 클래스가 로딩됨!");
@@ -54,4 +54,6 @@ public class MyDriver implements java.sql.Driver {
     // TODO Auto-generated method stub
     return null;
   }
+
+
 }
