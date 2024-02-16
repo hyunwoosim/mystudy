@@ -16,7 +16,7 @@
   - Ex) 실시간으로 변하는 뉴스 로고, 일기예보, 유트븡실시간 업로드
 - web Server의 요청을 위임받아 JavaApp을 관리(생성, 실행, 소멸)하여 결과를 받는다.
 
-- Servlet Container란?
+### Servlet?
   - serverApp + let(작은것)
   - 작은 서버 app
   - 서버의 작은 기능dmf EMtgksek.
