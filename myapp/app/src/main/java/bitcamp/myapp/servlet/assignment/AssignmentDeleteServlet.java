@@ -12,46 +12,48 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/assignment/delete")
 public class AssignmentDeleteServlet extends HttpServlet {
 
-  private AssignmentDao assignmentDao;
+    private AssignmentDao assignmentDao;
 
-  @Override
-  public void init() {
-    assignmentDao = (AssignmentDao) this.getServletContext().getAttribute("assignmentDao");
-  }
-
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html lang='en'>");
-    out.println("<head>");
-    out.println("  <meta charset='UTF-8'>");
-    out.println("  <title>비트캠프 데브옵스 5기</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>과제</h1>");
-
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
-
-      if (assignmentDao.delete(no) == 0) {
-        out.println("<p>과제 번호가 유효하지 않습니다.</p>");
-      } else {
-        out.println("<p>과제를 삭제했습니다.</p>");
-      }
-
-    } catch (Exception e) {
-      out.println("<p>삭제 오류!</p>");
-      out.println("<pre>");
-      e.printStackTrace(out);
-      out.println("</pre>");
+    @Override
+    public void init() {
+        assignmentDao = (AssignmentDao) this.getServletContext().getAttribute("assignmentDao");
     }
 
-    out.println("</body>");
-    out.println("</html>");
-  }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        out.println("<!DOCTYPE html>");
+        out.println("<html lang='en'>");
+        out.println("<head>");
+        out.println("  <meta charset='UTF-8'>");
+        out.println("  <title>비트캠프 데브옵스 5기</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>과제</h1>");
+
+        try {
+            int no = Integer.parseInt(request.getParameter("no"));
+
+            if (assignmentDao.delete(no) == 0) {
+                out.println("<p>과제 번호가 유효하지 않습니다.</p>");
+                response.setHeader("Refresh", "1;url=list");
+            } else {
+                response.sendRedirect("/assignment/list");
+                return;
+            }
+
+        } catch (Exception e) {
+            out.println("<p>삭제 오류!</p>");
+            out.println("<pre>");
+            e.printStackTrace(out);
+            out.println("</pre>");
+        }
+
+        out.println("</body>");
+        out.println("</html>");
+    }
 }
