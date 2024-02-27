@@ -23,7 +23,7 @@
   </context-param>
   <context-param>
     <param-name>jdbc.url</param-name>
-    <param-value>jdbc:mysql://localhost:3306/studydb</param-value>
+    <param-value>jdbc:mysql://localhost:8888/studydb</param-value>
   </context-param>
   <context-param>
     <param-name>jdbc.username</param-name>
@@ -63,5 +63,13 @@
     <url-pattern>/ex06/s3</url-pattern>
   </servlet-mapping>
 -->
+<!--  <servlet>-->
+<!--    <servlet-name>ex12.Servlet01</servlet-name>-->
+<!--    <servlet-name>com.eomcs.web.ex12.Servlet01</servlet-name>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>ex12.Servlet01</servlet-name>-->
+<!--    <url-pattern>/ex12/s01</url-pattern>-->
+<!--  </servlet-mapping>-->
 
 </web-app>
