@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/auth/logout")
 public class LogoutServlet extends HttpServlet {
 
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-        request.getSession().invalidate();
+    request.getSession().invalidate();
 
-        response.sendRedirect("/index.html");
-    }
+    response.sendRedirect("/index.html");
+  }
 }
