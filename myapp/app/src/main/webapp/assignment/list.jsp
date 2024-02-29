@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  trimDirectiveWhitespaces="true"%>
-<%@ page import="java.util.List"%>
-<%@ page import="bitcamp.myapp.vo.Assignment"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -13,7 +12,7 @@
 
 <h1>과제</h1>
 
-    <a href='/assignment/add'>새 과제</a>
+    <a href='/app/assignment/add'>새 과제</a>
 
 
       <table border='1'>
@@ -22,17 +21,15 @@
           </thead>
           <tbody>
 
-<%
-      List<Assignment> list = (List<Assignment>) request.getAttribute("list");
-      for (Assignment assignment : list) { %>
 
+ <c:forEach items="${list}" var="assignment">
             <tr>
-            <td><%=assignment.getNo()%></td>
-             <td><a href='/assignment/view?no=<%=assignment.getNo()%>'><%=assignment.getTitle()%></a></td>
-              <td><%=assignment.getDeadline()%></td>
+            <td>${assignment.no}</td>
+             <td><a href='/app/assignment/view?no=${assignment.no}'>${assignment.title}</a></td>
+              <td>${assignment.deadline}</td>
               </tr>
 
-      <% }%>
+      </c:forEach>
 
           </tbody>
       </table>
