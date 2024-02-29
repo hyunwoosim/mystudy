@@ -11,30 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/board/list")
 public class BoardListServlet extends HttpServlet {
 
-    private BoardDao boardDao;
+  private BoardDao boardDao;
 
-    @Override
-    public void init() {
-        this.boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+  @Override
+  public void init() {
+    this.boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+  }
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    String boardName = "";
+    try {
+      int category = Integer.valueOf(request.getParameter("category"));
+      request.setAttribute("boardName", category == 1 ? "게시글" : "가입인사");
+      request.setAttribute("list", boardDao.findAll(category));
+      request.setAttribute("category", category);
+      request.setAttribute("viewUrl", "/board/list.jsp");
+
+    } catch (Exception e) {
+      request.setAttribute("exception", e);
     }
-
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-
-        String title = "";
-        try {
-            int category = Integer.valueOf(request.getParameter("category"));
-            request.setAttribute("BoardName", category == 1 ? "게시글" : "가입인사");
-            request.setAttribute("list", boardDao.findAll(category));
-            request.setAttribute("category", category);
-            request.getRequestDispatcher("/board/form.jsp").forward(request, response);
-
-
-        } catch (Exception e) {
-            request.setAttribute("message", String.format("%s 목록 오류!", title));
-            request.setAttribute("exception", e);
-            request.getRequestDispatcher("/error,jsp").forward(request, response);
-        }
-    }
+  }
 }
