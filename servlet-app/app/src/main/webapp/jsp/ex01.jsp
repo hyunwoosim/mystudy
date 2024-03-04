@@ -27,7 +27,7 @@
    - 서블릿 실행 결과를 응답
 
 JSP 파일을 가지고 생성한 서블릿 소스(.java)와 클래스 파일(.class)의 위치
-- org.eclipse.wst.server.core/tmpx/work/...
+- org.eclipse.wst.server.core/tmp/work/...
 
 정리!
 - JSP 파일은 Python이나 PHP 처럼 직접 그 스크립트가 인터프리팅 되는 것이 아니다.
