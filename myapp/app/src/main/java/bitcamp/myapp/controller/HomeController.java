@@ -1,13 +1,9 @@
 package bitcamp.myapp.controller;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+public class HomeController {
 
-@WebServlet("/home")
-public class HomeController implements PageController {
-
-    public String execute(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/home")
+    public String execute()
         throws Exception {
         return "/home.jsp";
 
