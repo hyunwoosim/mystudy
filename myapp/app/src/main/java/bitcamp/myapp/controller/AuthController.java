@@ -1,6 +1,5 @@
-package bitcamp.myapp.controller.auth;
+package bitcamp.myapp.controller;
 
-import bitcamp.myapp.controller.PageController;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
 import java.util.ArrayList;
@@ -9,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class LoginController implements PageController {
+public class AuthController {
 
     MemberDao memberDao;
 
-    public LoginController(MemberDao memberDao) {
+    public AuthController(MemberDao memberDao) {
         this.memberDao = memberDao;
     }
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/auth/login")
+    public String login(HttpServletRequest request, HttpServletResponse response)
         throws Exception {
 
         if (request.getMethod().equals("GET")) {
@@ -63,6 +62,15 @@ public class LoginController implements PageController {
 
         return "/auth/login.jsp";
 
-
     }
+
+    @RequestMapping("/auth/logout")
+    public String logout(HttpServletRequest request)
+        throws Exception {
+
+        request.getSession().invalidate();
+
+        return "redirect:/index.html";
+    }
+
 }
