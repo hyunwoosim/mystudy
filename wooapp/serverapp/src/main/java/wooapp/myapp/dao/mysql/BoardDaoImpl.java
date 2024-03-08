@@ -1,43 +1,36 @@
 package wooapp.myapp.dao.mysql;
 
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import wooapp.myapp.dao.BoardDao;
 import wooapp.myapp.dao.DaoException;
 import wooapp.myapp.vo.Board;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
-import wooapp.util.ThreadConnection;
+
 
 public class BoardDaoImpl implements BoardDao {
 
-    ThreadConnection threadConnection;
+    Connection con;
     int category;
 
-    public BoardDaoImpl(ThreadConnection threadConnection, int category) {
-        this.threadConnection = threadConnection;
+    public BoardDaoImpl(Connection con, int category) {
+        this.con = con;
         this.category = category;
     }
 
     @Override
     public void add(Board board) {
-     Connection con = null;
-        try {
-            con = threadConnection.get();
-
-            con.setAutoCommit(false);
-
-
         try(PreparedStatement pstmt = con.prepareStatement(
             "insert into boards(title,content,writer,category) values(?,?,?,?)")) {
 
             pstmt.setString(1, board.getTitle());
             pstmt.setString(2, board.getContent());
             pstmt.setString(3, board.getWriter());
-            pstmt.setInt(4, board.getNo());
+            pstmt.setInt(4, category);
 
 
             pstmt.executeUpdate();
@@ -45,7 +38,7 @@ public class BoardDaoImpl implements BoardDao {
             con.commit();
 
         }
-        } catch (Exception e) {
+         catch (Exception e) {
             try{
                 con.rollback();
             }catch (Exception e2){
@@ -63,33 +56,21 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public int delete(int no) {
-        Connection con = null;
-        try {
-            con = threadConnection.get();
 
         try ( PreparedStatement pstmt = con.prepareStatement(
             "delete from boards where board_no=?");) {
 
             pstmt.setInt(1, no);
 
-            return pstmt.executeUpdate();
+             return pstmt.executeUpdate();
         }
-        } catch (Exception e) {
+         catch (Exception e) {
             throw new DaoException("데이터 삭제 오류", e);
-        }finally {
-            try {
-                con.close();
-            }catch (Exception e) {
-            }
-            }
+        }
     }
 
     @Override
     public List<Board> findAll() {
-        Connection con = null;
-        try {
-            con = threadConnection.get();
-
         try(PreparedStatement pstmt = con.prepareStatement(
             "select board_no, title, created_date from boards where category=? order by board_no desc")) {
 
@@ -108,7 +89,7 @@ public class BoardDaoImpl implements BoardDao {
                 list.add(board);
             }
             return list;
-        }
+
         } catch (Exception e) {
             throw new DaoException("데이터 가져오기 오류", e);
         }
@@ -116,9 +97,6 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public Board findBy(int no) {
-        Connection con = null;
-        try {
-            con = threadConnection.get();
 
         try(PreparedStatement pstmt = con.prepareStatement(
             "select * from boards where board_no = ?")) {
@@ -139,7 +117,7 @@ public class BoardDaoImpl implements BoardDao {
                 }
                 return null;
             }
-        }
+
         } catch (Exception e) {
             throw new DaoException("데이터 가져오기 오류", e);
         }
@@ -147,9 +125,6 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public int update(Board board) {
-        Connection con = null;
-        try {
-            con = threadConnection.get();
 
         try ( PreparedStatement pstmt = con.prepareStatement(
             "update boards set title=?, content=?, writer=? where board_no=?")) {
@@ -160,7 +135,7 @@ public class BoardDaoImpl implements BoardDao {
             pstmt.setInt(4, board.getNo());
 
             return pstmt.executeUpdate();
-        }
+
         } catch (Exception e) {
             throw new DaoException("데이터 변경 오류", e);
         }

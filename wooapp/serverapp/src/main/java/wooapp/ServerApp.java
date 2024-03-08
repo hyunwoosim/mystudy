@@ -22,9 +22,7 @@ import wooapp.myapp.handler.board.BoardListHandler;
 import wooapp.myapp.handler.board.BoardModifyHandler;
 import wooapp.myapp.handler.board.BoardViewHandler;
 import wooapp.util.Prompt;
-import wooapp.util.ThreadConnection;
 import java.io.DataInputStream;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
@@ -52,19 +50,14 @@ public class ServerApp {
 
     void prepareDatabase() {
         try {
-            // JVM이 JDBC 드라이버 파일(.jar)에 설정된대로 자동으로 처리한다.
-//      Driver driver = new com.mysql.cj.jdbc.Driver();
-//      DriverManager.registerDriver(driver);
-
-            ThreadConnection threadConnection = new ThreadConnection(
+            Connection con = DriverManager.getConnection(
                 "jdbc:mysql://db-ld28n-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
                 "Bitcamp!@#123");
-//      "jdbc:mysql://localhost/studydb", "study", "Bitcamp!@#123");
 
-            boardDao = new BoardDaoImpl(threadConnection, 1);
-            greetingDao = new BoardDaoImpl(threadConnection, 2);
-            assignmentDao = new AssignmentDaoImpl(threadConnection);
-            JJMemberDao = new JJMemberDaoImpl(threadConnection);
+            boardDao = new BoardDaoImpl(con, 1);
+            greetingDao = new BoardDaoImpl(con, 2);
+            assignmentDao = new AssignmentDaoImpl(con);
+            JJMemberDao = new JJMemberDaoImpl(con);
 
         } catch (Exception e) {
             System.out.println("통신 오류!");

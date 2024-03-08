@@ -13,17 +13,15 @@ import wooapp.util.ThreadConnection;
 
 public class JJMemberDaoImpl implements JJ_MemberDao {
 
-ThreadConnection threadConnection;
+Connection con;
 
-  public JJMemberDaoImpl(ThreadConnection threadConnection) {
-    this.threadConnection = threadConnection;
+  public JJMemberDaoImpl(Connection con) {
+    this.con = con;
   }
 
   @Override
   public void add(JJ_Member member) {
-    Connection con = null;
-    try {
-      con = threadConnection.get();
+
       try
         (PreparedStatement pstmt = con.prepareStatement(
             "insert into jjmember(belt,name,age,weight,team) values('?','?','?','?','?')"
@@ -34,7 +32,7 @@ ThreadConnection threadConnection;
         pstmt.setString(4, member.getWeight());
         pstmt.setString(5, member.getTeam());
       pstmt.executeUpdate();
-      }
+
     }
     catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
@@ -43,15 +41,12 @@ ThreadConnection threadConnection;
 
   @Override
   public int delete(int no) {
-    Connection con = null;
-    try {
-      con = threadConnection.get();
 
       try (PreparedStatement pstmt = con.prepareStatement(
           "delete from jjmember where no=%d", no)) {
         pstmt.setInt(1, no);
      return pstmt.executeUpdate();
-      }
+
 
       } catch (Exception e) {
         throw new DaoException("데이터 삭제 오류", e);
@@ -61,9 +56,6 @@ ThreadConnection threadConnection;
 
   @Override
   public List<JJ_Member> findAll() {
-    Connection con = null;
-    try {
-      con = threadConnection.get();
 
       try (PreparedStatement pstmt = con.prepareStatement(
           "select * from jjmember");
@@ -84,7 +76,7 @@ ThreadConnection threadConnection;
           list.add(member);
         }
         return list;
-      }
+
       } catch (Exception e) {
         throw new DaoException("데이터 가져오기 오류", e);
       }
@@ -93,10 +85,6 @@ ThreadConnection threadConnection;
 
   @Override
   public JJ_Member findBy(int no) {
-
-    Connection con = null;
-    try {
-      con = threadConnection.get();
 
         try (PreparedStatement pstmt = con.prepareStatement(
             "select * from jjmember where no = " + no)) {
@@ -117,7 +105,7 @@ ThreadConnection threadConnection;
             }
           }
           return null;
-        }
+
         } catch (Exception e) {
           throw new DaoException("데이터 가져오기 오류", e);
 
@@ -125,11 +113,6 @@ ThreadConnection threadConnection;
 
   @Override
   public int update(JJ_Member member) {
-
-      Connection con = null;
-      try {
-        con = threadConnection.get();
-
 
       try (PreparedStatement pstmt = con.prepareStatement(
           "update jjmember set belt='?', name='?', age='?', weight='?', team='?' where no=?")) {
@@ -140,7 +123,7 @@ ThreadConnection threadConnection;
         pstmt.setString(5, member.getTeam());
         pstmt.setInt(6, member.getNo());
        return pstmt.executeUpdate();
-      }
+
 
     } catch (Exception e) {
       throw new DaoException("데이터 변경 오류", e);
