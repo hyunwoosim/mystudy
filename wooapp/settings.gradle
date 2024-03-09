@@ -11,5 +11,5 @@ plugins {
 }
 
 rootProject.name = 'wooapp'
-include('clientapp')
-include('serverapp')
+//include('clientapp')
+include('app')
