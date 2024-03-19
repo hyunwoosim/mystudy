@@ -37,7 +37,7 @@
 - 이것도 C/C++로 만들어졌다.
 
 ## Java - DBMS와 통신
-- 자바는 JDBC Driverㅇ르 통해 DBMS와 통신한다.
+- 자바는 JDBC Driver를 통해 DBMS와 통신한다.
 
 ### Type 1
 - ODBC- JDBC Bridge
@@ -69,7 +69,7 @@
 ## JDBC API 프로그래밍
 1. JDBC 드라이버준비 java.sql.Driver구현체를 생성하여   
 DriverManager에 등록한다.   
-("ServiceProvider" 명세에 따랄 JDBC Driver파일에 들어있는 설정대로 객체를 자동으로 생성하고 등록한다. 생략!)
+("ServiceProvider" 명세에 따라 JDBC Driver파일에 들어있는 설정대로 객체를 자동으로 생성하고 등록한다. 생략!)
   - Driver driver =new com.mysql.jdbc.Driver();
   - DriverManager.registerDriver(Driver)
 
