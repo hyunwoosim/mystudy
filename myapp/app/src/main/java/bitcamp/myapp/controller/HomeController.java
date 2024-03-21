@@ -1,19 +1,20 @@
 package bitcamp.myapp.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
 
-    public HomeController() {
-        System.out.println("HomeController() 호출됨!");
-    }
+  private final Log log = LogFactory.getLog(this.getClass());
 
-    @RequestMapping("/home")
-    public String execute()
-        throws Exception {
-        return "/home.jsp";
+  public HomeController() {
+    log.debug("HomeController() 호출됨!");
+  }
 
-    }
+  @GetMapping("/home")
+  public void home() {
+  }
 }

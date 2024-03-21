@@ -14,17 +14,16 @@ public class Member implements Serializable {
     private String photo;
     private Date createdDate;
 
-
     @Override
     public String toString() {
         return "Member{" +
-            "no=" + no +
-            ", email='" + email + '\'' +
-            ", name='" + name + '\'' +
-            ", password='" + password + '\'' +
-            ", photo='" + photo + '\'' +
-            ", createdDate=" + createdDate +
-            '}';
+                "no=" + no +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", photo='" + photo + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
     }
 
     public String getPhoto() {

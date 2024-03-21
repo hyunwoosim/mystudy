@@ -5,15 +5,15 @@ import java.util.List;
 
 public interface AttachedFileDao {
 
-    void add(AttachedFile file);
+  void add(AttachedFile file);
 
-    int addAll(List<AttachedFile> files);
+  int addAll(List<AttachedFile> files);
 
-    int delete(int no);
+  int delete(int no);
 
-    int deleteAll(int boardNo);
+  int deleteAll(int boardNo);
 
-    List<AttachedFile> findAllByBoardNo(int boardNo);
+  List<AttachedFile> findAllByBoardNo(int boardNo);
 
-    AttachedFile findByNo(int no);
+  AttachedFile findByNo(int no);
 }
