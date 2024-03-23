@@ -1,11 +1,11 @@
 -- DDL(Data Definition Language)
 
-drop table if exists wboards restrict;
-drop table if exists wboard_files restrict;
-drop table if exists wassignments restrict;
-drop table if exists wmembers restrict;
+drop table if exists boards restrict;
+drop table if exists board_files restrict;
+drop table if exists assignments restrict;
+drop table if exists members restrict;
 
-create table wboards(
+create table boards(
   board_no int not null,
   title varchar(255) not null,
   content text not null,
@@ -14,33 +14,33 @@ create table wboards(
   created_date datetime null default now()
 );
 
-alter table wboards
+alter table boards
   add constraint primary key (board_no),
   modify column board_no int not null auto_increment;
 
-create table wboard_files(
+create table board_files(
   file_no int not null,
   file_path varchar(255) not null,
   board_no int not null
 );
 
-alter table wboard_files
+alter table board_files
   add constraint primary key (file_no),
   modify column file_no int not null auto_increment,
-  add constraint wboard_files_fk foreign key (board_no) references wboards(board_no);
+  add constraint board_files_fk foreign key (board_no) references boards(board_no);
 
-create table wassignments(
+create table assignments(
   assignment_no int not null,
   title varchar(255) not null,
   content text not null,
   deadline date not null
 );
 
-alter table wassignments
+alter table assignments
   add constraint primary key (assignment_no),
   modify column assignment_no int not null auto_increment;
 
-create table wmembers(
+create table members(
   member_no int not null,
   belt varchar(255) not null,
   name varchar(255) not null,
@@ -52,9 +52,9 @@ create table wmembers(
 );
 
 
-alter table wmembers
+alter table members
   add constraint primary key (member_no),
   modify column member_no int not null auto_increment;
 
-alter table wboards
-  add constraint wboards_fk foreign key (writer) references wmembers(member_no);
+alter table boards
+  add constraint boards_fk foreign key (writer) references members(member_no);
