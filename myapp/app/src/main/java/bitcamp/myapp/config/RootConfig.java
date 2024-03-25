@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -12,16 +13,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-
-@ComponentScan(value = {
-        "bitcamp.myapp.dao"
-})
-@PropertySource({
-        "classpath:config/jdbc.properties"
-})
+@EnableTransactionManagement
+@MapperScan("bitcamp.myapp.dao")
+@ComponentScan({"bitcamp.myapp.dao", "bitcamp.myapp.service"})
+@PropertySource({"classpath:config/jdbc.properties"})
 public class RootConfig {
 
     private final Log log = LogFactory.getLog(this.getClass());
