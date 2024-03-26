@@ -1,19 +1,17 @@
 package bitcamp.myapp.service;
 
 import bitcamp.myapp.vo.Assignment;
-
 import java.util.List;
-
 
 public interface AssignmentService {
 
-    void add(Assignment assignment);
+  void add(Assignment assignment);
 
-    List<Assignment> list();
+  List<Assignment> list();
 
-    Assignment get(int no);
+  Assignment get(int no);
 
-    int update(Assignment assignment);
+  int update(Assignment assignment);
 
-    int delete(int no);
+  int delete(int no);
 }

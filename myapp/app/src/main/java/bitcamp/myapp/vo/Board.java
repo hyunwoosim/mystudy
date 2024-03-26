@@ -1,14 +1,11 @@
 package bitcamp.myapp.vo;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
-@NoArgsConstructor
 @Data
 public class Board implements Serializable {
 
@@ -22,6 +19,5 @@ public class Board implements Serializable {
     private Date createdDate;
     private List<AttachedFile> files;
     private int fileCount;
-
 
 }
