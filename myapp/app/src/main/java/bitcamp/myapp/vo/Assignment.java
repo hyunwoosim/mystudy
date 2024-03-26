@@ -1,14 +1,11 @@
 package bitcamp.myapp.vo;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-
-@NoArgsConstructor
-@Data
+@Data // = @Getter + @Setter + @ToString + @EqualsAndHashCode + @RequiredArgsConstructor
 public class Assignment implements Serializable {
 
     private static final long serialVersionUID = 100L;
