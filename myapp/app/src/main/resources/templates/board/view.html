@@ -32,7 +32,8 @@
 
         <ul data-th-if="*{files[0].filePath}">
             <li data-th-each="file : *{files}" data-th-object="${file}">
-                <a data-th-href="@{'/upload/board/' + *{filePath}}" data-th-text="*{filePath}"></a>
+                <a data-th-href="@{'https://kr.object.ncloudstorage.com/bitcamp-devops5-142/board/' + *{filePath}}"
+                   data-th-text="*{filePath}"></a>
                 [<a data-th-href="@{file/delete(category=${category},no=*{no})}">삭제</a>]
             </li>
 

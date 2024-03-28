@@ -12,10 +12,10 @@
 <form action="update" data-th-action="@{update}" data-th-object="${member}" enctype='multipart/form-data' method='post'>
     <div>
         사진:
-        <a data-th-href="@{'https://03cqcopt2689.edge.naverncp.com/bitcamp-devops5-142/member/' + *{photo}(type=f,w=80,h=80,ttype=jpg)}"
+        <a data-th-href="@{'https://kr.object.ncloudstorage.com/bitcamp-devops5-142/member/' + *{photo}}"
            data-th-if="*{photo}">
 
-            <img data-th-src="@{'https://03cqcopt2689.edge.naverncp.com/bitcamp-devops5-142/member/' + *{photo}(type=f,w=80,h=80,ttype=jpg)}"
+            <img data-th-src="@{'https://03cqcopt2689.edge.naverncp.com/hlvmC6RcpB/member/' + *{photo}(type=f,w=80,h=80,ttype=jpg)}"
             ></a><br>
 
         <a data-th-unless="*{photo}" href='/img/default-photo.jpeg'>
