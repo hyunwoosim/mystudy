@@ -26,7 +26,7 @@ public class AssignmentAddServlet extends HttpServlet {
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -49,7 +49,9 @@ public class AssignmentAddServlet extends HttpServlet {
 
       assignmentDao.add(assignment);
 
-    out.println("<p>과제를 등록했습니다.</p>");
+      response.sendRedirect("/assignment/list");
+      return;
+
 
   } catch (Exception e) {
     out.println("<p>과제 등록 오류!</p>");

@@ -16,14 +16,12 @@ public class AssignmentDeleteServlet extends HttpServlet {
 
   private AssignmentDao assignmentDao;
 
-    public AssignmentDeleteServlet() {
-      DBConnectionPool connectionPool = new DBConnectionPool(
-          "jdbc:mysql://localhost/studydb", "study", "Bitcamp!@#123");
-      this.assignmentDao = new AssignmentDaoImpl(connectionPool);
-    }
+   public void init() {
+     assignmentDao = (AssignmentDao) this.getServletContext().getAttribute("assignmentDao");
+   }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
       response.setContentType("text/html;charset=UTF-8");
@@ -43,8 +41,10 @@ public class AssignmentDeleteServlet extends HttpServlet {
 
         if (assignmentDao.delete(no) == 0) {
           out.println("<p>과제 번호가 유효하지 않습니다.</p>");
+          response.setHeader("Refresh", "1;url=list");
         } else {
-          out.println("<p>과제를 삭제했습니다.</p>");
+        response.sendRedirect("list");
+        return;
         }
 
       } catch (Exception e) {

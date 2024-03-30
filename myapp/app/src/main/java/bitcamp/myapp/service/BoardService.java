@@ -2,23 +2,26 @@ package bitcamp.myapp.service;
 
 import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
+
 import java.util.List;
 
 public interface BoardService {
 
-  void add(Board board);
+    void add(Board board);
 
-  List<Board> list(int category);
+    List<Board> list(int category, int pageNo, int pageSize);
 
-  Board get(int no);
+    Board get(int no);
 
-  int update(Board board);
+    int update(Board board);
 
-  int delete(int no);
-  
-  List<AttachedFile> getAttachedFiles(int no);
+    int delete(int no);
 
-  AttachedFile getAttachedFile(int fileNo);
+    List<AttachedFile> getAttachedFiles(int no);
 
-  int deleteAttachedFile(int fileNo);
+    AttachedFile getAttachedFile(int fileNo);
+
+    int deleteAttachedFile(int fileNo);
+
+    int countAll(int category);
 }

@@ -156,6 +156,193 @@ gm as g on g.school_no = s.school_no
 where s.school_no = 1;
 
 
+-- 스쿨 일정 상셍보기
+select
+c.class_no,
+u.name,
+c.name,
+c.photo,
+c.content,
+c.location,
+c.now_at,
+c.created_at,
+c.ended_at,
+c.member,
+c.repeat_set
+from classes as c inner join
+school_users as s on s.school_no = c.school_no
+inner join 
+users as u on u.user_no = s.user_no
+where s.school_no =1 and u.user_no =2;
+
+-- 메인페이지 스쿨 일정 보기
+select
+c.class_no,
+c.name,
+u.name,
+c.photo,
+c.content,
+c.location,
+c.member,
+c.repeat_set,
+date_format(c.now_at, '%y-%m-%d'),
+date_format(c.created_at, '%y-%m-%d'),
+date_format(c.ended_at, '%y-%m-%d'),
+concat(counter, '/', total)
+from classes as c inner join
+school_users as s on s.school_no = c.school_no
+inner join 
+users as u on u.user_no = s.user_no
+from(select
+@counter := @counter + 1 as counter,
+(select count(*) from class_users) as total
+ from class_users
+ cross join (select @counter : 0) as init) as counts
+where s.school_no =1 and u.user_no =2;
+
+
+SELECT
+    c.class_no,
+    c.name,
+    u.name,
+    c.photo,
+    c.content,
+    c.location,
+    c.member,
+    c.repeat_set,
+    DATE_FORMAT(c.now_at, '%y-%m-%d') AS formatted_now_at,
+    DATE_FORMAT(c.created_at, '%y-%m-%d') AS formatted_created_at,
+    DATE_FORMAT(c.ended_at, '%y-%m-%d') AS formatted_ended_at,
+    CONCAT(counter, '/', total) AS count_format
+FROM
+    classes AS c
+INNER JOIN
+    school_users AS s ON s.school_no = c.school_no
+INNER JOIN
+    users AS u ON u.user_no = s.user_no
+CROSS JOIN (
+    SELECT
+        @counter := @counter + 1 AS counter,
+        (SELECT COUNT(*) FROM c.member) AS total
+    FROM
+        class_users as cu
+    CROSS JOIN (SELECT @counter := 0) AS init
+) AS counts
+WHERE
+    s.school_no = 1
+    AND u.user_no = 2
+  and c.class_no =1;
+
+
+
+
+
+SELECT
+    c.class_no,
+    c.name,
+    u.name,
+    c.photo,
+    c.content,
+    c.location,
+    c.member,
+    c.repeat_set,
+    DATE_FORMAT(c.now_at, '%y-%m-%d') AS formatted_now_at,
+    DATE_FORMAT(c.created_at, '%y-%m-%d') AS formatted_created_at,
+    DATE_FORMAT(c.ended_at, '%y-%m-%d') AS formatted_ended_at,
+    CONCAT(counter, '/', total) AS count_format
+FROM
+    classes AS c
+INNER JOIN
+    school_users AS s ON s.school_no = c.school_no
+INNER JOIN
+    users AS u ON u.user_no = s.user_no
+CROSS JOIN (
+    SELECT
+        @counter := @counter + 1 AS counter,
+        (SELECT COUNT(*) FROM class_users WHERE cu.class_no = c.class_no) AS total
+    FROM
+        class_users AS cu
+    CROSS JOIN (SELECT @counter := 0) AS init
+) AS counts
+WHERE
+    s.school_no = 1
+    AND u.user_no = 2
+    AND c.class_no = 1;
+
+
+SELECT
+    c.class_no,
+    c.name,
+    u.name AS user_name,
+    c.photo,
+    c.content,
+    c.location,
+    c.member,
+    c.repeat_set,
+    DATE_FORMAT(c.now_at, '%y-%m-%d') AS formatted_now_at,
+    DATE_FORMAT(c.created_at, '%y-%m-%d') AS formatted_created_at,
+    DATE_FORMAT(c.ended_at, '%y-%m-%d') AS formatted_ended_at,
+    CONCAT(cu.user_no,'/', total_members) AS count_format
+FROM
+    classes AS c
+INNER JOIN
+    school_users AS su ON su.school_no = c.school_no
+INNER JOIN
+    users AS u ON u.user_no = su.user_no
+LEFT JOIN (
+    SELECT
+        class_no,
+        COUNT(*) AS total_members
+    FROM
+        class_users
+    GROUP BY
+        class_no
+) AS cu ON cu.class_no = c.class_no
+WHERE
+    c.class_no = 1;
+
+
+
+
+--------
+
+
+  SELECT
+      cu.class_no,
+      c.name,
+      u.name,
+      c.photo,
+      c.content,
+      c.location,
+      c.member,
+      c.repeat_set,
+      DATE_FORMAT(c.now_at, '%y-%m-%d') AS formatted_now_at,
+      DATE_FORMAT(c.created_at, '%y-%m-%d') AS formatted_created_at,
+      DATE_FORMAT(c.ended_at, '%y-%m-%d') AS formatted_ended_at
+  FROM
+      classes AS c
+  INNER JOIN
+      class_users as cu ON cu.school_no = c.school_no
+       inner join 
+      users as u on cu.user_no = u.user_no
+  WHERE
+      c.class_no = 6
+      and
+      c.school_no = 2;
+
+
+    
+CONCAT((SELECT COUNT(*) FROM class_users as cu WHERE cu.class_no = c.class_no), '/', c.member) AS count_format
+
+-- 회원 태그 
+select 
+u.user_no
+
+
+
+
+
+
 insert into gm(school_no, user_no, message, created_at, photo)
 values(1, 1, '실시간채팅','2024-01-01 10:00:00','photo');
 insert into gm(school_no, user_no, message, created_at, photo)
@@ -314,16 +501,16 @@ insert into grades
 
 insert into school_users
 (user_no, school_no, grade_no,created_at) 
-values(1,1,1,'2023-04-01');
+values(5,2,1,'2023-04-01');
 insert into school_users
 (user_no, school_no, grade_no,created_at) 
-values(1,2,2,'2024-01-03');
+values(6,2,2,'2024-01-03');
 insert into school_users
 (user_no, school_no, grade_no,created_at) 
-values(2,1,3,'2024-01-01');
+values(7,2,3,'2024-01-01');
 insert into school_users
 (user_no, school_no, grade_no,created_at) 
-values(3,1,2,'2024-01-01');
+values(8,2,2,'2024-01-01');
 
 
 insert into tags
@@ -569,3 +756,165 @@ values ('school4', '이것은 스쿨입니다4', 30,'test4',1);
 insert into schools 
 (name, content, limited_man, photo, open_range) 
 values ('school5', '이것은 스쿨입니다5', 30,'test5',1);
+
+
+
+insert into class_users
+(user_no, school_no, class_no)
+values(5, 2, 6);
+insert into class_users
+(user_no, school_no, class_no)
+values(6, 2, 6);
+insert into class_users
+(user_no, school_no, class_no)
+values(7, 2, 6);
+insert into class_users
+(user_no, school_no, class_no)
+values(8, 2, 6);
+
+
+
+insert into classes
+(school_no, user_no, name, security, content, location, now_at, created_at, ended_at, member, repeat_set,photo)
+values (2, 1, '축구모임', 0, '재밌는 축구하실 분 모집', '비트축구장', '2024-03-29','2024-01-01','2024-01-10',11,0,'photo1');
+insert into classes
+(school_no, user_no, name, security, content, location, now_at, created_at, ended_at, member, repeat_set,photo)
+values (2, 1, '축구모임', 0, '재밌는 축구하실 분 모집', '비트축구장', '2024-03-29','2024-01-01','2024-01-10',11,0,'photo1');
+insert into classes
+(school_no, user_no, name, security, content, location, now_at, created_at, ended_at, member, repeat_set,photo)
+values (2, 1, '축구모임', 0, '재밌는 축구하실 분 모집', '비트축구장', '2024-03-29','2024-01-01','2024-01-10',11,0,'photo1');
+insert into classes
+(school_no, user_no, name, security, content, location, now_at, created_at, ended_at, member, repeat_set,photo)
+values (2, 1, '축구모임', 0, '재밌는 축구하실 분 모집', '비트축구장', '2024-03-29','2024-01-01','2024-01-10',11,0,'photo1');
+insert into classes
+(school_no, user_no, name, security, content, location, now_at, created_at, ended_at, member, repeat_set,photo)
+values (2, 1, '축구모임', 0, '재밌는 축구하실 분 모집', '비트축구장', '2024-03-29','2024-01-01','2024-01-10',11,0,'photo1');
+insert into classes
+(school_no, user_no, name, security, content, location, now_at, created_at, ended_at, member, repeat_set,photo)
+values (2, 1, '축구모임', 0, '재밌는 축구하실 분 모집', '비트축구장', '2024-03-29','2024-01-01','2024-01-10',11,0,'photo1');
+
+
+
+
+
+
+insert into users
+(name, pwd, address, phone, email, nickname, birth, 
+gender, grade, login_type, created_at, profile, manner_point, photo) 
+values('일일일', '12', '제주도', 
+'010-1111-1111', 'qwer@naver.com', 
+'qwr', '20241129',1,0,0,'2024-02-01','qwer',40,'test');
+insert into users
+(name, pwd, address, phone, email, nickname, birth, 
+gender, grade, login_type, created_at, profile, manner_point, photo) 
+values('이이이', '34', '제주도', 
+'010-2222-2222', 'asdf@naver.com', 
+'asdf', '20241129',1,0,0,'2024-02-01','qwer',40,'test');insert into users
+(name, pwd, address, phone, email, nickname, birth, 
+gender, grade, login_type, created_at, profile, manner_point, photo) 
+values('삼삼삼', '56', '제주도', 
+'010-3333-3333', 'zxcv@naver.com', 
+'zxcv', '20241129',1,0,0,'2024-02-01','qwer',40,'test');
+
+
+
+insert into schools 
+(name, content, limited_man, photo, open_range,created_at) 
+values ('11111', '이것은 스쿨입니다1', 30,'test1',1,'2024-01-01');
+insert into schools 
+(name, content, limited_man, photo, open_range,created_at) 
+values ('22222', '이것은 스쿨입니다2', 30,'test2',1,'2024-02-02');
+insert into schools 
+(name, content, limited_man, photo, open_range,created_at) 
+values ('3333', '이것은 스쿨입니다3', 30,'test3',1,'2024-03-03');
+
+insert into users
+(name, pwd, address, phone, email, nickname, birth, 
+gender, grade, login_type, created_at, profile, manner_point, photo) 
+values('사사사사', '34', '제주도', 
+'010-2222-2222', 'qwerqwer@naver.com', 
+'qqqqqqq', '20241129',1,0,0,'2024-02-01','qwer',40,'test');insert into users
+(name, pwd, address, phone, email, nickname, birth, 
+gender, grade, login_type, created_at, profile, manner_point, photo) 
+values('오오오오', '56', '제주도', 
+'010-3333-3333', 'asdfasdf@naver.com', 
+'wwwwww', '20241129',1,0,0,'2024-02-01','qwer',40,'test');
+
+
+
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(12,1,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(12,2,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(12,3,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(13,1,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(13,2,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(13,3,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(14,1,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(14,2,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(14,3,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(15,1,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(15,2,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(15,3,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(16,1,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(16,2,1,'2023-04-01');
+insert into school_users
+(user_no, school_no, grade_no,created_at) 
+values(16,3,1,'2023-04-01');
+
+
+select * from user_no  from school_users where user_no =12;
+
+select 
+s.school_no,
+s.name,
+u.user_no,
+u.name,
+su.created_at
+from 
+schools as s
+inner join
+school_users as su on s.school_no = su.school_no
+inner join
+users as u on u.user_no = su.user_no
+where s.school_no = 3;
+
+select 
+s.name,
+s.school_no,
+u.name,
+u.nickname,
+su.created_at
+from
+schools as s 
+inner join 
+school_users as su on s.school_no = su.school_no
+inner join
+users as u on u.user_no = su.user_no
+where u.user_no = 12;
