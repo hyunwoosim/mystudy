@@ -19,14 +19,12 @@ public class AssignmentListServlet extends HttpServlet {
 
     private AssignmentDao assignmentDao;
 
-    public AssignmentListServlet() {
-      DBConnectionPool connectionPool = new DBConnectionPool(
-          "jdbc:mysql://localhost/studydb", "study", "Bitcamp!@#123");
-      this.assignmentDao = new AssignmentDaoImpl(connectionPool);
-    }
+  public void init() {
+    assignmentDao = (AssignmentDao) this.getServletContext().getAttribute("assignmentDao");
+  }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
       response.setContentType("text/html;charset=UTF-8");
