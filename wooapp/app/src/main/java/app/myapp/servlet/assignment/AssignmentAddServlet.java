@@ -18,15 +18,13 @@ public class AssignmentAddServlet extends HttpServlet {
   private AssignmentDao assignmentDao;
 
 
-  public AssignmentAddServlet() {
-    DBConnectionPool connectionPool = new DBConnectionPool(
-        "jdbc:mysql://localhost/studydb", "study", "Bitcamp!@#123"
-    );
-    this.assignmentDao = new AssignmentDaoImpl(connectionPool);
-  }
+    @Override
+    public void init() throws ServletException {
+        assignmentDao = (AssignmentDao) this.getServletContext().getAttribute("assignmentDao");
+    }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    @Override
+  protected void doPost (HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
