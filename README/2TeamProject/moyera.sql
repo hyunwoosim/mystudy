@@ -272,6 +272,7 @@ WHERE
 
 SELECT
     c.class_no,
+    c.school_no,
     c.name,
     u.name AS user_name,
     c.photo,
@@ -279,12 +280,12 @@ SELECT
     c.location,
     c.member,
     c.repeat_set,
-    DATE_FORMAT(c.now_at, '%y-%m-%d') AS formatted_now_at,
     DATE_FORMAT(c.created_at, '%y-%m-%d') AS formatted_created_at,
+    DATE_FORMAT(c.start_at, '%y-%m-%d') AS formatted_start_at,
     DATE_FORMAT(c.ended_at, '%y-%m-%d') AS formatted_ended_at,
     CONCAT(cu.user_no,'/', total_members) AS count_format
 FROM
-    classes AS c
+    school_classes AS c
 INNER JOIN
     school_users AS su ON su.school_no = c.school_no
 INNER JOIN
@@ -918,3 +919,8 @@ school_users as su on s.school_no = su.school_no
 inner join
 users as u on u.user_no = su.user_no
 where u.user_no = 12;
+
+
+
+
+
