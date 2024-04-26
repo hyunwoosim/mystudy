@@ -1,10 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비트캠프 데브옵스 5기</title>
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.css" rel="stylesheet">
+
+    <style>
+        /* 이미 있던 스타일 */
+    </style>
 </head>
 <body>
-$END$
+
+<!-- 이미 있던 HTML 내용 -->
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth', // 달력 초기 뷰 설정
+            headerToolbar: {
+                center: 'addEventButton' // 헤더에 '일정 추가' 버튼 추가
+            },
+            customButtons: {
+                addEventButton: {
+                    text: '일정 추가', // 버튼 텍스트
+                    click: function() {
+                        var dateStr = prompt('날짜를 YYYY-MM-DD 형식으로 입력하세요.');
+                        var date = new Date(dateStr + 'T00:00:00'); // 입력된 날짜로부터 Date 객체 생성
+
+                        if (!isNaN(date.valueOf())) { // 날짜가 유효한지 확인
+                            calendar.addEvent({ // FullCalendar에 이벤트 추가
+                                title: '동적 이벤트', // 이벤트 제목
+                                start: date, // 이벤트 시작일
+                                allDay: true // 하루 종일 이벤트로 설정
+                            });
+                            alert('일정이 추가되었습니다.');
+                        } else {
+                            alert('잘못된 날짜 형식입니다.');
+                        }
+                    }
+                }
+            }
+        });
+
+        calendar.render(); // 달력 렌더링
+    });
+</script>
+
+<!-- 이미 있던 HTML 내용 -->
+
 </body>
 </html>
