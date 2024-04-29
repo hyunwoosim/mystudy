@@ -922,5 +922,14 @@ where u.user_no = 12;
 
 
 
+// 초대하기 
 
 
+insert into alerts 
+(user_no,name, type, content,photo,redirect_path, to_user_no, school_no)
+values (#{user_no},#{name},#{type},#{content},#{photo},#{redirect_path},#{to_user_no},#{school_no});
+
+
+insert into alerts 
+(user_no,name, type, content,photo,redirect_path, to_user_no, school_no)
+values (1,'test',1,'teset1','qwerqwer','qwerq',3,1);
