@@ -13,13 +13,13 @@
 <button id="btn2" type="reset">초기화</button>
 </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
 <script>
 "use strict"
 
 $("#btn1").click(() => {
 	  $.ajax({
-		  url: "test6.jsp",
+		  url: "test4.jsp",
 		  method: "get",
 		  data: {a: $("#a").val(), b: $("#b").val()}
 	  }).done((data) => {
