@@ -933,3 +933,47 @@ values (#{user_no},#{name},#{type},#{content},#{photo},#{redirect_path},#{to_use
 insert into alerts 
 (user_no,name, type, content,photo,redirect_path, to_user_no, school_no)
 values (1,'test',1,'teset1','qwerqwer','qwerq',3,1);
+
+
+
+// 일정 상세보기
+
+select
+  sc.class_no,
+  sc.school_no,
+  sc.user_no,
+  sc.name,
+  sc.content,
+  sc.location,
+  sc.location_detail,
+  sc.start_at,
+  sc.ended_at,
+  sc.photo,
+  sc.member,
+  u.nickname,
+  su.level_no,
+  l.name as level_name,
+  cu.user_no
+from
+  school_classes as sc
+inner join
+  users as u on sc.user_no = u.user_no
+inner join
+  school_users as su on sc.user_no= su.user_no
+  and sc.school_no = su.school_no
+inner join
+  levels as l on su.level_no = l.level_no
+inner join
+  class_users as cu on sc.class_no = cu.class_no
+  and sc.school_no = cu.school_no
+where
+  sc.class_no = 48;
+
+
+
+
+
+
+
+
+  
