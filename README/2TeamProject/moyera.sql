@@ -969,6 +969,55 @@ inner join
 where
   sc.class_no = 48;
 
+// 일정 상세보기 최종
+
+SELECT
+  sc.class_no,
+  sc.school_no,
+  sc.user_no,
+  sc.name,
+  sc.content,
+  sc.location,
+  sc.location_detail,
+  sc.start_at,
+  sc.ended_at,
+  sc.photo,
+  sc.member,
+  COUNT(cu.user_no) AS user_count,
+  u.user_no,
+  u.nickname,
+  su.user_no,
+  su.level_no,
+  l.name AS level_name
+FROM
+  school_classes AS sc
+INNER JOIN
+  users AS u ON sc.user_no = u.user_no
+INNER JOIN
+  school_users AS su ON sc.user_no = su.user_no AND sc.school_no = su.school_no
+INNER JOIN
+  levels AS l ON su.level_no = l.level_no
+INNER JOIN
+  class_users AS cu ON sc.class_no = cu.class_no AND sc.school_no = cu.school_no
+WHERE
+  sc.class_no = 48
+GROUP BY
+  sc.class_no,
+  sc.school_no,
+  sc.user_no,
+  sc.name,
+  sc.content,
+  sc.location,
+  sc.location_detail,
+  sc.start_at,
+  sc.ended_at,
+  sc.photo,
+  sc.member,
+  u.nickname,
+  su.level_no,
+  l.name;
+  
+
 
 
 
