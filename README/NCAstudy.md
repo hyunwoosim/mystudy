@@ -173,4 +173,188 @@
     - 서버 이미지를 다른 리전으로 복제할 수 있다.
     - 서버 이미지는 오토 스케일링의 Launch Configuration에서도 이용 가능
     
+42. MC(Main Console)에서 설정 가능한 상품
+    - Hybrid Cloud Hosting
+    - Workplace
 
+43. 국내 서비스로 한국 대상으올 대용량 파일 다운로드 할 때 적절한 상품 
+    - CDN+
+
+44. Live Migragtion
+    -  Live Migration 이란 서버가 죽지 않고 호스트 서버가 변경 되는것을 뜻한다.
+
+45. MC(Main Console) Dashboard에서 기본적으로 보여지는 내용
+    - Daily Event
+    - 결제 정보
+    - CPU Top5
+
+46. 카테고리가 같은 상품    
+    - Effective Log Search & Analytics
+    - Real User Analytics
+    - Cloud Hadoop
+
+47. 서비스로의 인프라를 의미 하고 일반적으로 Computing, Networking, Storage등의 IT 리소스 서비스 형태
+     - laas
+
+48. CLI 사용 올바른 방법
+    - CLI 참조서에서 CLI파일을 다운로드 하여 서버에 설치한다.
+
+49.  쿠버네티스 워커 노드에 설치 되있는 요소
+    - docker
+    - kublet
+    - kube-proxy
+
+50. NAS 볼륨 스냅샷에 대한 설명
+    - NAS 볼륨 가용량 안에서 성생
+    - 볼륨 사용량에 대한 모니터링이 가능
+
+51. RAID 1+0 설명
+    - RAID1으로 구성된 볼륨을 RAIDO으로 구성한다.
+    - 저장공간 손실이 50%이다
+    - 단순 볼륨에 비해 읽기 쓰기 속도가 뛰어나다.
+
+52. Kubernetes에서 service 객체를 통해 만들어지는 로드 밸런서 타입은?
+    - Network LB
+
+53. File System의 데이터 저장 방식 중 데이터 저장공간의 비효율성이 존재하는 방식
+    - 분산 저장 방식
+
+54. 오토 스케일링 
+    - 네이버 클라우드 플랫폼 CLI로 제어할 수 있다.
+    - 스케일 인 대상 VM에 대한 사용자 지정이 가능하다.
+
+55. Live Migration 지원 서버타입
+    - Standard
+    - High CPU
+    - High Memory
+
+56. 서버에 대한 설명
+    - 다양한 스펙의 상품군이 존재
+    - VDS는 홍콩에는 제공하지 않느다.
+    - Micro 서버는 Classic 환경에서 사용 가능
+
+57. VPC Classic 2세대 서버 Standard 서버 스펙
+    - vCPU 2개 RAM 4GB
+
+58. Archive Storage에 대한 설명
+    - Swift API를 활용해서 데이터 관리
+
+59. 쿠버네티스 마스터 노드에 설치된 요소들
+    - etcd
+    - apiserver
+    - scheduler
+
+60. RAID 1(미러) 설명
+    - 단순 볼륨에 비해 읽기 속도가 뛰어나다.
+
+61. 사용 가능한 OS항목
+    - CentOS
+    - Windows
+    - Ubuntu
+
+62. 리눅스 HTTPD 서버의 로그파일 위치
+    - /var/log/httpd
+
+63. GPU 서버에 대한 설명
+    - PCI Pass Throught 방식으로 제공한다.
+
+64. 블록 스트리지 디스크 타입 변경
+    - 서버를 정지시킨 후 스토리지를 부착시킨 후 스냅샷 생성, 스토리지를 생성하며 디스크 타입을 변경
+
+65. 베어 메탈
+    - 몇가지 정해진 스펙 군에서 이용가능
+    - 제공되는 OS로 Oracle Linux가 있다.
+    - 디스크 구성은 RAID 1+0 및 RAID 5로 할 수 있다.
+
+66. NAS 스토리지 
+    - NAS 볼륨의 최대 용량은 10TB이다. 
+
+67. 오토스케일링 설명
+    - 헬스 체크 방식은 LoadBalancer와 서버 방식을 제공한다.
+    - ASG 그룹에는 항상 최댓값 수만큼의 서버가 유지된다.
+
+68. 여러 개의 하드 디스크에 일부 중복된 데이터를 나눠 저장하는 기술 
+    - RAID
+
+69. VPC 환경에서 내 서버 이미지에대한 설명
+    - 서버가 운영중인 상태에서도 생성이 가능하다.
+
+70.  VM으로부터 간섭현상을 줄일 수 있는 서버 타입
+    - Hight CPU
+    - Bare Metal
+    - Hight-memory
+
+71. 유사 서버 생성시 기존 서버의 설정 내용이 반영되는 항목은?
+    - Init Script
+
+72. Block Storage에 대한 설명
+    - 기본 스토리지(=root 볼륨)가 디스크 타입과 무관하게 추가 스토리지는 HDD/SSD 모든 타입 볼륨 할당 가능하다.
+
+73. 분산 파일 시스템
+    - CODA
+
+74. Object Storage API를 제공하는 리전
+    - 미국 서부
+    - 싱가포르
+    - 독일
+
+75. Block Storage에 대한 설명
+     - VM 상태에 따라 볼륨 detach가 불가능 할 수도 있다.
+
+76. 파일 시스템중 파일의 시작위치와 크기를 가지고 데이터를 저장하는 방식으로 고전적인 파일 시스템 구조이며 단순하지만 데이터 공간에 대한 낭비가 심한 파일시스템 방식은?
+    - 연속 할당 방식
+
+77. 서버를 확장성 있게 구성하거나 관리할 필요 없이 비즈니스 로직 코드로 서비스를 구성할 수 있는 상품은?
+    - Colud Functions
+
+78. 리눅스 LVM을 구성하고자 할때 LVM구성이 올바른 멸령어 사용 순서
+    -  fsidk > pvcreate > vgcreate > lvcreate
+
+79. 서버 이미지 빌더 
+    - 서버 이밎 생성에 사용되는 Packet 용 스크립트를 생성하고 관리하도록 도와주는 상품이다.
+    - 오픈 소스인 Packer 를 활용해서 구현되는 것이다.
+    - 템플릿에 대한 버전 관리 기능을 제공핟ㄴ다.
+
+80. 서버에 대한 설명
+    - 서버를 정지한 후엔 서버 스펙 변경 가능
+    - 디스는 SSD 타입과 HDD타입을 제공한다.
+    - 네이버 클라우드 플랫폼 안의 다른 상품들과 연계하여 사용 가능
+
+81.  Storage 상품
+    - NAS
+    - Block Storage
+
+82. Container Registry
+    - Private Endpoint 구성이 가능
+    - Object Storage를 저장소로 사용한다.
+    - 컨테이너 취약점 분석기능 제공
+
+83. NAS 볼륨 용량 증설 단위
+    - 100GB
+
+84. 서버 생성되면 기본 네트워크 링크 속도   
+    - 1Gbps
+
+85. VPC환경 기준, Zone에 종속적인 상품
+    - Public Subnet
+    - Private Subnet
+    - NAT Gateway
+    
+86. 쿠버 네티스 Ingress
+    - 외부에서 오는 Traffic 들을 클러스터 내부의 Service로 라우팅하기 위한 규칙의 집합이다.
+    - Service타입 지정은 Node Port혹은 로드 밸런서 지정을 하여야 한다.
+    - NCR은 호스트 기반 및 URL NICOND
+
+87. MC(Main Console)에서 보여지는 서버 호스트 네임을 변경하는 법
+    - 콘솔에서 서버 이름 변경을 선택하여 호스트명을 변경한다.
+
+88. 전가 상화 
+    - 하이퍼 바이저 위 구동할 수 있는 게스트 OS 종류에 제약이 없다.
+
+89. Block Storage 
+    - VM 당 최대 15개의 추가 볼륨을 attach 할 수 있다.
+
+90. VPC 환경 ACG에 대한 설명
+    - 서버 NIC에 매핑된다.
+    - in bound/outbound 룰 설정이 모두 가능
+    -    서버 생성시 필수적으로 매핑해야하는 요소이다.
